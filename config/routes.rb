@@ -1,4 +1,11 @@
 TimeStudy::Application.routes.draw do
+
+  root to: "surveys#index"
+
+  resources :surveys do
+
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
