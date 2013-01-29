@@ -3,3 +3,5 @@
 <h2><%= @survey.name %></h2>
 
 <%= link_to "Edit Survey", edit_survey_path(@survey) %>
+<%= link_to "Delete Survey", survey_path(@survey),
+            method: :delete, confirm: "Are you sure?" %>
