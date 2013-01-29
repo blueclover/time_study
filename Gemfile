@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'pg'
 gem 'rails', '3.2.8'
 
+gem 'dynamic_form', '1.1.4'
+
 gem 'jquery-rails', '2.0.2'
 gem 'faker', '1.0.1'
 

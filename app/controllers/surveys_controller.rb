@@ -12,6 +12,9 @@ class SurveysController < ApplicationController
     if @survey.save
       flash[:notice] = "Survey has been created."
       redirect_to @survey
+    else
+      flash[:error] = "Survey has not been created."
+      render :new
     end
   end
 
