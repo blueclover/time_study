@@ -24,10 +24,6 @@ nav {
     margin: 10px 0 10px 0;
 }
 
-a {
-    color: #74CC00;
-}
-
 textarea {
     padding: 3px;
     margin-top: 5px;
@@ -47,7 +43,7 @@ input[type=file] {
 }
 
 #notice {
-    background: #85FF00;
+    background: #7eff5d;
     color: black;
 }
 

@@ -21,4 +21,19 @@ class SurveysController < ApplicationController
   def show
     @survey = Survey.find(params[:id])
   end
+
+  def edit
+    @survey = Survey.find(params[:id])
+  end
+
+  def update
+    @survey = Survey.find(params[:id])
+    if @survey.update_attributes(params[:survey])
+      flash[:notice] = "Survey has been updated."
+      redirect_to @survey
+    else
+      flash[:error] = "Survey has not been updated."
+      render :edit
+    end
+  end
 end

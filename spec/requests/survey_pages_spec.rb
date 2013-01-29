@@ -3,22 +3,18 @@ require 'spec_helper'
 describe "Survey pages" do
   subject { page }
 
-  describe "index" do
-    let!(:survey) { create(:survey, name: "Test Survey") }
+  let!(:survey) { create(:survey, name: "Test Survey") }
 
-    before do
-      visit root_path
-    end
+  before { visit root_path }
+
+  describe "index" do
 
     it { should have_link("Test Survey") }
 
   end
 
   describe "survey creation" do
-    before do
-      visit root_path
-      click_link 'New Survey'
-    end
+    before { click_link 'New Survey' }
 
     describe "with invalid data" do
       before do
@@ -38,4 +34,30 @@ describe "Survey pages" do
       it { should have_content('Survey has been created.') }
     end
   end
+
+  describe "edit" do
+    before do
+      click_link "Test Survey"
+      click_link "Edit Survey"
+    end
+
+    describe "with valid input" do
+      before do
+        fill_in "Name", with: "Test Survey 2"
+        click_button "Update Survey"
+      end
+
+      it { should have_content("Survey has been updated.") }
+    end
+
+    describe "with invalid input" do
+      before do
+        fill_in "Name", with: ""
+        click_button "Update Survey"
+      end
+
+      it { should have_content("Survey has not been updated.") }
+    end
+  end
+
 end
