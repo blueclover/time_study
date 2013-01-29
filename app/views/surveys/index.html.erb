@@ -1,1 +1,8 @@
 <%= link_to "New Survey", new_survey_path %>
+
+<h2>Surveys</h2>
+<ul>
+  <% @surveys.each do |survey| %>
+    <li><%= link_to survey.name, survey %></li>
+  <% end %>
+</ul>

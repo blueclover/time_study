@@ -3,6 +3,17 @@ require 'spec_helper'
 describe "Survey pages" do
   subject { page }
 
+  describe "index" do
+    let!(:survey) { create(:survey, name: "Test Survey") }
+
+    before do
+      visit root_path
+    end
+
+    it { should have_link("Test Survey") }
+
+  end
+
   describe "survey creation" do
     before do
       visit root_path
