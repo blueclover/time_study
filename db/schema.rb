@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128222051) do
+ActiveRecord::Schema.define(:version => 20130130173821) do
+
+  create_table "activity_logs", :force => true do |t|
+    t.date     "start_date"
+    t.integer  "staff_id"
+    t.integer  "survey_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "activity_logs", ["survey_id"], :name => "index_activity_logs_on_survey_id"
 
   create_table "surveys", :force => true do |t|
     t.string   "name"

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Survey pages" do
   subject { page }
 
-  let(:survey_name) { "Test Survey" }
+  survey_name = "Test Survey"
   let!(:survey) { create(:survey, name: survey_name) }
 
   before { visit root_path }
