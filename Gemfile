@@ -3,28 +3,40 @@ source 'https://rubygems.org'
 gem 'pg'
 gem 'rails', '3.2.8'
 
-gem 'dynamic_form', '1.1.4'
+gem 'dynamic_form'
 
-gem 'jquery-rails', '2.0.2'
-gem 'faker', '1.0.1'
+gem 'jquery-rails'
+gem 'faker'
 
 gem 'devise'
 gem 'email_spec'
 
 group :development, :test do
-  gem 'rspec-rails', '2.10.0'
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+  gem 'guard-spork'
+  gem 'spork'
 end
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '3.2.5'
-  gem 'coffee-rails', '3.2.2'
-  gem 'uglifier', '1.2.3'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
+end
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
 end
 
 group :test do
-  gem 'capybara', '1.1.2'
-  gem 'factory_girl_rails', '1.4.0'
-  gem 'database_cleaner', '0.7.0'
+  gem 'capybara', '~> 1.1.2'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  gem 'rb-inotify', '~> 0.8.8'
+  gem 'libnotify'
 end
