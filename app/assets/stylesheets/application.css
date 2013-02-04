@@ -51,12 +51,12 @@ input[type=file] {
     background: #FF3444;
 }
 
-ul#tickets {
+ul#activity_logs {
     padding: 15px;
     list-style-type: none;
 }
 
-ul#tickets li {
+ul#activity_logs li {
     margin-bottom: 10px;
 }
 
@@ -83,16 +83,16 @@ ul#tickets li {
     background: #C2EC4B;
 }
 
-ul#tickets .state {
+ul#activity_logs .state {
     padding-right: 5px;
     /*  margin-right: 4em;*/
 }
 
-ul#tickets .state {
+ul#activity_logs .state {
     float: left;
 }
 
-#ticket, .comment {
+#activity_log, .comment {
     margin: 15px 0 15px 0;
     padding: 15px;
     background: #eaeaea;
@@ -101,19 +101,19 @@ ul#tickets .state {
     -webkit-border-radius: 5px;
 }
 
-#ticket a {
+#activity_log a {
     color: #67A300;
 }
 
-#ticket menu {
+#activity_log menu {
     font-size: 75%;
 }
 
-menu, #ticket .state, .states {
+menu, #activity_log .state, .states {
     float: right;
 }
 
-#ticket section {
+#activity_log section {
     clear: both;
 }
 
@@ -129,11 +129,11 @@ menu, #ticket .state, .states {
     padding: 5px;
 }
 
-#ticket #tags {
+#activity_log #tags {
     margin-top: 20px;
 }
 
-#ticket .tag {
+#activity_log .tag {
     background: #232323;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -141,11 +141,11 @@ menu, #ticket .state, .states {
     padding: 8px;
 }
 
-#ticket .tag a {
+#activity_log .tag a {
     color: white;
 }
 
-#ticket .tag .delete {
+#activity_log .tag .delete {
     font-size: 125%;
     text-decoration: none;
 }

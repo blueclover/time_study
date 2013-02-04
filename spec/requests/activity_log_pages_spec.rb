@@ -30,7 +30,7 @@ describe "Activity Log pages" do
 
     describe "with valid data" do
       before do
-        fill_in 'Staff', with: 1
+        fill_in 'Staff',      with: 1
         fill_in 'Start date', with: DateTime.now
         click_button 'Create Activity log'
       end

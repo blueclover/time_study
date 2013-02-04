@@ -16,7 +16,6 @@ Spork.prefork do
   # Devise configuration
   require "rails/application"
   Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
-  
   require File.dirname(__FILE__) + "/../config/environment.rb"
 
   # Requires supporting ruby files with custom matchers and macros, etc,

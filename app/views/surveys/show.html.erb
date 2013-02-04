@@ -6,3 +6,11 @@
 <%= link_to "Delete Survey", survey_path(@survey),
             method: :delete, confirm: "Are you sure?" %>
 <%= link_to "New Activity Log", new_survey_activity_log_path(@survey) %>
+<ul id='activity logs'>
+	<% @survey.activity_logs.each do |log| %>
+		<li>
+			#<%= log.id %> -
+			<%= link_to log.staff_id, [@survey, log] %>
+		</li>
+	<% end %>
+</ul>
