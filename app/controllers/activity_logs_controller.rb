@@ -8,6 +8,7 @@ class ActivityLogsController < ApplicationController
 
   def create
     @activity_log = @survey.activity_logs.build(params[:activity_log])
+    @activity_log.staff_id = current_user
     if @activity_log.save
       flash[:notice] = "Activity log has been created."
       redirect_to [@survey, @activity_log]
