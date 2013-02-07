@@ -47,13 +47,6 @@ class SurveysController < ApplicationController
   end
 
   private
-    def authorize_admin!
-      authenticate_user!
-      unless current_user.admin?
-        flash[:alert] = "You must be an admin to do that."
-        redirect_to root_path
-      end
-    end
     def find_survey
       @survey = Survey.find(params[:id])
     rescue ActiveRecord::RecordNotFound
