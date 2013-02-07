@@ -4,6 +4,8 @@ describe "User pages" do
 	subject { page }
 
 	let!(:admin) { create(:admin) }
+	let!(:user)  { create(:user) }
+
 	before do
 	  sign_in_as!(admin)
 	  visit root_path
@@ -11,7 +13,7 @@ describe "User pages" do
 	  click_link "Users"
 	end
 
-	describe "creating new user" do
+	describe "creating a new user" do
 		before { click_link "New User" }
 		describe "with invalid input" do
 			before do
@@ -33,6 +35,7 @@ describe "User pages" do
 			describe "with 'Admin' unchecked" do
 				before { click_button "Create User" }
 				it { should have_content("User has been created.") }
+				it { should have_content("new@county.org (User)") }
 			end
 
 			describe "with 'Admin' checked" do
@@ -43,6 +46,26 @@ describe "User pages" do
 				it { should have_content("User has been created.") }
 				it { should have_content("new@county.org (Admin)") }
 			end
+		end
+	end
+
+	describe "modifying existing user" do
+		before { click_link user.email }
+
+		describe "editing a user" do
+			before { click_link "Edit User" }
+
+			describe "with valid input" do
+				before do
+				  fill_in "Email", with: "new_name@example.com"
+				  click_button "Update User"
+				end
+				
+				it { should have_content "User has been updated." }
+				it { should have_content "new_name@example.com" }
+				it { should_not have_content user.email }
+			end
+
 		end
 	end
 end

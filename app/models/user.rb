@@ -13,6 +13,10 @@ class User < ActiveRecord::Base
 
   has_many :activity_logs, foreign_key: :staff_id, dependent: :destroy
 
+  def timeout_in
+  	30.minutes
+  end
+
 	def to_s
 		"#{email} (#{admin? ? "Admin" : "User"})"
 	end
