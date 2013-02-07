@@ -28,10 +28,21 @@ describe "User pages" do
 			before do
 			  fill_in "Email", with: "new@county.org"
 			  fill_in "Password", with: "password"
-			  click_button "Create User"
 			end
 
-			it { should have_content("User has been created.") }
+			describe "with 'Admin' unchecked" do
+				before { click_button "Create User" }
+				it { should have_content("User has been created.") }
+			end
+
+			describe "with 'Admin' checked" do
+				before do
+				  check "Admin?"
+				  click_button "Create User" 
+				end
+				it { should have_content("User has been created.") }
+				it { should have_content("new@county.org (Admin)") }
+			end
 		end
 	end
 end

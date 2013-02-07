@@ -9,5 +9,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
   # attr_accessible :title, :body
 
-  has_many :activity_logs, foreign_key: :staff_id, dependent: :destroy 
+  attr_accessible :email, :password, :admin, as: :admin
+
+  has_many :activity_logs, foreign_key: :staff_id, dependent: :destroy
+
+	def to_s
+		"#{email} (#{admin? ? "Admin" : "User"})"
+	end
 end
