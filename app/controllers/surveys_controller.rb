@@ -1,5 +1,6 @@
 class SurveysController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, only: [:index, :show]
+  before_filter :authorize_admin!, except: [:index, :show]
   before_filter :find_survey, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -46,6 +47,13 @@ class SurveysController < ApplicationController
   end
 
   private
+    def authorize_admin!
+      authenticate_user!
+      unless current_user.admin?
+        flash[:alert] = "You must be an admin to do that."
+        redirect_to root_path
+      end
+    end
     def find_survey
       @survey = Survey.find(params[:id])
     rescue ActiveRecord::RecordNotFound

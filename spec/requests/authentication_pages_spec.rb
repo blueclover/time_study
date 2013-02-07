@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Authenication pages" do
   subject { page }
 
-  let(:user) { create(:user, email: "user@alameda.org") }
+  let(:admin) { create(:admin, email: "admin@alameda.org") }
 
   before do
     visit root_path
@@ -36,8 +36,8 @@ describe "Authenication pages" do
   describe "user signin" do
     before do
       click_link "Sign in"
-      fill_in "Email", with: user.email
-      fill_in "Password", with: user.password
+      fill_in "Email", with: admin.email
+      fill_in "Password", with: admin.password
       click_button "Sign in"
     end
     it { should have_content("Signed in successfully.") }
@@ -50,13 +50,13 @@ describe "Authenication pages" do
       describe "in the Surveys controller" do
 
         describe "creating a survey" do
-          before { click_link "New Survey" }
+          before { visit new_survey_path }
           it { should have_content("You need to sign in or sign up") }
 
-          describe "after signing in" do
+          describe "after signing in as admin" do
             before do
-              fill_in "Email", with: user.email
-              fill_in "Password", with: user.password
+              fill_in "Email", with: admin.email
+              fill_in "Password", with: admin.password
               click_button "Sign in"
             end
 

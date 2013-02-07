@@ -3,6 +3,10 @@ FactoryGirl.define do
     sequence(:email) { |n| "foo#{n}@county.org" }
     password "password"
     password_confirmation "password"
+
+    factory :admin do
+      admin true
+    end
   end
 
   factory :survey do
@@ -12,6 +16,11 @@ FactoryGirl.define do
   factory :activity_log do
   	survey
   	user
-    start_date 3.days.ago
+    start_date 0.days.ago
+  end
+
+  factory :log_entry do
+    activity_log
+    sequence(:date) { |n| n.days.from_now }
   end
 end
