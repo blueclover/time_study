@@ -65,7 +65,20 @@ describe "User pages" do
 				it { should have_content "new_name@example.com" }
 				it { should_not have_content user.email }
 			end
+		end
 
+		describe "deleting a user" do
+			before { click_link "Delete User" }			
+			it { should have_content("User has been deleted.") }
+		end
+	end
+
+	describe "modifying current user" do
+		before { click_link admin.email }
+
+		describe "deleting current user" do
+			before { click_link "Delete User" }
+			it { should have_content "You cannot delete your own account." }
 		end
 	end
 end

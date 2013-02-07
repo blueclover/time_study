@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :admin, as: :admin
 
-  has_many :activity_logs, foreign_key: :staff_id, dependent: :destroy
+  has_many :activity_logs, dependent: :destroy
 
   def timeout_in
   	30.minutes
