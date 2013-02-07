@@ -5,8 +5,12 @@ describe "Survey pages" do
 
   survey_name = "Test Survey"
   let!(:survey) { create(:survey, name: survey_name) }
+  let!(:user) { create(:user) }  
 
-  before { visit root_path }
+  before do
+    sign_in_as!(user)
+    visit root_path
+  end
 
   describe "index" do
 

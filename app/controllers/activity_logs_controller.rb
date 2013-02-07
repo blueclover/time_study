@@ -1,4 +1,5 @@
 class ActivityLogsController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :find_survey
   before_filter :find_activity_log, only: [:show, :edit, :update, :destroy]
 
@@ -8,7 +9,7 @@ class ActivityLogsController < ApplicationController
 
   def create
     @activity_log = @survey.activity_logs.build(params[:activity_log])
-    @activity_log.staff_id = current_user
+    @activity_log.user = current_user
     if @activity_log.save
       flash[:notice] = "Activity log has been created."
       redirect_to [@survey, @activity_log]
@@ -20,6 +21,26 @@ class ActivityLogsController < ApplicationController
 
   def show
 
+  end
+
+  def edit
+    
+  end
+
+  def update
+    if @activity_log.update_attributes(params[:activity_log])
+      flash[:notice] = "Activity Log has been updated."
+      redirect_to [@survey, @activity_log]
+    else
+      flash[:alert] = "Activity Log has not been updated."
+      render :edit
+    end
+  end
+
+  def destroy
+    @activity_log.destroy
+    flash[:notice] = "Activity Log has been deleted."
+    redirect_to @survey
   end
 
   private

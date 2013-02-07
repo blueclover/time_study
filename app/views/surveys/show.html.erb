@@ -9,8 +9,8 @@
 <ul id='activity logs'>
 	<% @survey.activity_logs.each do |log| %>
 		<li>
-			#<%= log.id %> -
-			<%= link_to log.staff_id, [@survey, log] %>
+			<%= log.user.email %> -
+			<%= link_to log.start_date, [@survey, log] %>
 		</li>
 	<% end %>
 </ul>

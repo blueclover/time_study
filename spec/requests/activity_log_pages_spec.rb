@@ -5,8 +5,11 @@ describe "Activity Log pages" do
 
   survey_name = "Test Survey"
   let!(:survey) { create(:survey, name: survey_name) }
+  let!(:user) { create(:user) }
+  let!(:log) { create(:activity_log, survey: survey) }
 
   before do
+    sign_in_as!(user)
     visit root_path
     click_link survey_name
   end
@@ -17,20 +20,21 @@ describe "Activity Log pages" do
   #
   #end
 
-  describe "activity log creation" do
-    before { click_link 'New Activity Log' }
+  describe "new" do
+    before do 
+      click_link 'New Activity Log' 
+    end
 
-    describe "with invalid data" do
+    describe "with invalid input" do
       before do
         click_button "Create Activity log"
       end
 
-      it { should have_content("Staff can't be blank") }
+      it { should have_content("Start date can't be blank") }
     end
 
-    describe "with valid data" do
+    describe "with valid input" do
       before do
-        fill_in 'Staff',      with: 1
         fill_in 'Start date', with: DateTime.now
         click_button 'Create Activity log'
       end
@@ -39,10 +43,45 @@ describe "Activity Log pages" do
     end
   end
 
-  #describe "edit" do
-  #  before do
-  #    click_link "Edit Activity Log"
-  #  end
+  describe "existing" do
+    before do
+      click_link log.start_date.strftime("%Y-%m-%d")
+    end
+
+    describe "view" do
+      it { should have_content(log.user.email) }
+    end
+
+    describe "edit" do
+      before { click_link "Edit Activity Log" }
+
+      describe "with invalid input" do
+        before do
+          fill_in "Start date", with: ""
+          click_button "Update Activity log"
+        end
+
+        it { should have_content "Activity Log has not been updated" }
+      end
+      describe "with valid input" do  
+        before do
+          fill_in "Start date", with: 10.days.ago
+          click_button "Update Activity log"
+        end
+
+        it { should have_content "Activity Log has been updated" }
+      end
+    end
+
+    describe "delete" do
+      before do
+        click_link "Delete Activity Log"
+      end
+      
+      it { should have_content "Activity Log has been deleted." }
+    end
+   
+  end
   #
   #  describe "with valid input" do
   #

@@ -1,4 +1,9 @@
 <div id='activity_log'>
-  <h2><%= @activity_log.staff_id %></h2>
-  <%= @activity_log.start_date %>
+  <h2><%= @activity_log.user.email %></h2>
+  <%= link_to "Edit Activity Log", [:edit, @survey, @activity_log] %>
+  <%= link_to "Delete Activity Log", [@survey, @activity_log],
+            method: :delete, confirm: "Are you sure?" %> 
+  <p>
+  	<%= @activity_log.start_date %>
+  </p>
 </div>

@@ -1,7 +1,9 @@
 class ActivityLog < ActiveRecord::Base
-  belongs_to :survey
-  attr_accessible :staff_id, :start_date
+  attr_accessible :start_date
 
-  validates :staff_id, presence: true
+  belongs_to :survey
+  belongs_to :user
+
+  validates :user, presence: true
   validates :start_date, presence: true
 end

@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
          :trackable, :validatable, :timeoutable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation
   # attr_accessible :title, :body
 
-  has_many :activity_logs, foreign_key: "staff_id", dependent: :destroy 
+  has_many :activity_logs, foreign_key: :staff_id, dependent: :destroy 
 end
