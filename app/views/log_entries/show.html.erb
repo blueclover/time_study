@@ -1,0 +1,9 @@
+<h2><%= @log_entry.date %></h2>
+<ul id='activities'>
+	<% @activities.each do |activity| %>
+		<li>
+			<%= activity.code %> - 
+			<%= activity.name %>: 0
+		</li>
+	<% end %>
+</ul>

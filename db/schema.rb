@@ -11,7 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130207025831) do
+ActiveRecord::Schema.define(:version => 20130209000023) do
+
+  create_table "activities", :force => true do |t|
+    t.integer  "log_entry_id"
+    t.integer  "activity_category_id"
+    t.float    "hours"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "activities", ["activity_category_id"], :name => "index_activities_on_activity_category_id"
+  add_index "activities", ["log_entry_id"], :name => "index_activities_on_log_entry_id"
+
+  create_table "activity_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.decimal  "weight",     :default => 1.0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
 
   create_table "activity_logs", :force => true do |t|
     t.date     "start_date"
@@ -22,6 +41,19 @@ ActiveRecord::Schema.define(:version => 20130207025831) do
   end
 
   add_index "activity_logs", ["survey_id"], :name => "index_activity_logs_on_survey_id"
+
+  create_table "counties", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "log_entries", :force => true do |t|
+    t.date     "date"
+    t.integer  "activity_log_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "log_entries", ["activity_log_id"], :name => "index_log_entries_on_activity_log_id"
 
   create_table "surveys", :force => true do |t|
     t.string   "name"

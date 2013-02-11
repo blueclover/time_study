@@ -6,4 +6,12 @@
   <p>
   	Activity Log Starting <%= @activity_log.start_date %>
   </p>
+	<ul id='log-entries'>
+		<% @activity_log.log_entries.order(:date).each_with_index do |entry, i| %>
+			<li>
+				Day <%= i + 1 %> -
+				<%= link_to entry.date, [@activity_log, entry] %>
+			</li>
+		<% end %>
+	</ul>
 </div>

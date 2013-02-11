@@ -75,10 +75,7 @@ describe "User pages" do
 
 	describe "modifying current user" do
 		before { click_link admin.email }
-
-		describe "deleting current user" do
-			before { click_link "Delete User" }
-			it { should have_content "You cannot delete your own account." }
-		end
+			
+		it { should_not have_link "Delete User" }
 	end
 end

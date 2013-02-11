@@ -25,6 +25,11 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
+
+  gem 'twitter-bootstrap-rails'
+  gem 'libv8'
+  gem 'less-rails'
+  gem 'therubyracer'
 end
 
 group :development do

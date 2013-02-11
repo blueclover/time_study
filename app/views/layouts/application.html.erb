@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>
-    <% if content_for?(:title) %>
-      <%= yield(:title) %>
-    <% else %>
-      Time Study
-    <% end %>
-  </title>
+  <%= render 'layouts/title' %>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
-<% flash.each do |key, value| %>
-  <div class='flash' id='<%= key %>'>
-    <%= value %>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/">Medi-Cal Time Study</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <% if user_signed_in? %>
+              <% if current_user.admin? %>
+                <li><%= link_to "Admin", admin_root_path %></li>
+              <% end -%>
+              <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+            <% else %>
+              <li><%= link_to "Sign up", new_user_registration_path %></li>
+              <li><%= link_to "Sign in", new_user_session_path %></li>
+            <% end %>  
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
+<div class="container">
+  <% flash.each do |key, value| %>
+    <div class='flash' id='<%= key %>'>
+      <%= value %>
+    </div>
+  <% end %>
 
-<nav>
-  <% if user_signed_in? %>
-    Signed in as <%= current_user.email %>
-    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-    <% if current_user.admin? %>
-      <%= link_to "Admin", admin_root_path %>
-    <% end -%>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path %>
-    <%= link_to "Sign in", new_user_session_path %>
-  <% end %>  
-</nav>
-
-<%= yield %>
-
+  <%= yield %>
+</div>
 </body>
 </html>

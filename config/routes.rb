@@ -8,6 +8,10 @@ TimeStudy::Application.routes.draw do
     resources :activity_logs
   end
 
+  resources :activity_logs do
+    resources :log_entries
+  end
+
   namespace :admin do
     root to: "base#index"
     resources :users

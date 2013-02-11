@@ -11,6 +11,13 @@ class ActivityLogsController < ApplicationController
     @activity_log = @survey.activity_logs.build(params[:activity_log])
     @activity_log.user = current_user
     if @activity_log.save
+      5.times do |n|
+        date = n.days.since(@activity_log.start_date).to_date
+        entry = @activity_log.log_entries.create!(date: date)
+        ActivityCategory.order(:code).each do |activity|
+          entry.activities.create!(activity_category: activity)
+        end
+      end
       flash[:notice] = "Activity log has been created."
       redirect_to [@survey, @activity_log]
     else
