@@ -45,7 +45,7 @@ describe "Activity Log pages" do
 
   describe "existing" do
     before do
-      click_link log.start_date.strftime("%Y-%m-%d")
+      click_link log.id.to_s
     end
 
     describe "view" do

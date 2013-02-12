@@ -11,6 +11,8 @@ gem 'faker'
 gem 'devise'
 gem 'email_spec'
 
+gem 'simple_form'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'

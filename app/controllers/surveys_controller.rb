@@ -14,7 +14,7 @@ class SurveysController < ApplicationController
   def create
     @survey = Survey.new(params[:survey])
     if @survey.save
-      flash[:notice] = "Survey has been created."
+      flash[:success] = "Survey has been created."
       redirect_to @survey
     else
       flash[:error] = "Survey has not been created."
@@ -32,7 +32,7 @@ class SurveysController < ApplicationController
 
   def update
     if @survey.update_attributes(params[:survey])
-      flash[:notice] = "Survey has been updated."
+      flash[:success] = "Survey has been updated."
       redirect_to @survey
     else
       flash[:error] = "Survey has not been updated."

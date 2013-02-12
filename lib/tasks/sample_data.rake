@@ -39,8 +39,9 @@ def make_users
 end
 
 def make_surveys
-  5.times do |n|
-    Survey.create!(name: "Example survey #{n+1}")
+  counties = County.all(limit: 10)
+  counties.each do |county|
+    Survey.create!(name: "#{county.name} Survey Feb 2013")
   end
 end
 

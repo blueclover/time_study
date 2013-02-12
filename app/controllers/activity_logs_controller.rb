@@ -18,10 +18,10 @@ class ActivityLogsController < ApplicationController
           entry.activities.create!(activity_category: activity)
         end
       end
-      flash[:notice] = "Activity log has been created."
+      flash[:success] = "Activity log has been created."
       redirect_to [@survey, @activity_log]
     else
-      flash[:alert] = "Activity log has not been created."
+      flash[:error] = "Activity log has not been created."
       render :new
     end
   end
@@ -34,10 +34,10 @@ class ActivityLogsController < ApplicationController
 
   def update
     if @activity_log.update_attributes(params[:activity_log])
-      flash[:notice] = "Activity Log has been updated."
+      flash[:success] = "Activity Log has been updated."
       redirect_to [@survey, @activity_log]
     else
-      flash[:alert] = "Activity Log has not been updated."
+      flash[:error] = "Activity Log has not been updated."
       render :edit
     end
   end
@@ -51,9 +51,17 @@ class ActivityLogsController < ApplicationController
   private
     def find_survey
       @survey = Survey.find(params[:survey_id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "The survey you were looking" +
+          " for could not be found."
+      redirect_to surveys_path
     end
 
     def find_activity_log
       @activity_log = @survey.activity_logs.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "The record you were looking" +
+          " for could not be found."
+      redirect_to @survey
     end
 end

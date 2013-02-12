@@ -36,7 +36,8 @@
   </div>
 <div class="container">
   <% flash.each do |key, value| %>
-    <div class='flash' id='<%= key %>'>
+    <div class="alert alert-<%= key -%>">
+      <a href="#" class="close" data-dismiss="alert">&times;</a>
       <%= value %>
     </div>
   <% end %>
