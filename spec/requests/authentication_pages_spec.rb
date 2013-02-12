@@ -61,7 +61,7 @@ describe "Authenication pages" do
             end
 
             it "should render the desired protected page" do
-              page.should have_selector('h2', text: 'New Survey')
+              page.should have_selector('legend', text: 'New Survey')
             end
           end
         end

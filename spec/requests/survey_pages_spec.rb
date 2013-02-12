@@ -70,7 +70,8 @@ describe "Survey pages" do
             click_button 'Create Survey'
           end
 
-          it { should have_content("Name can't be blank") }
+          it { should have_content("Survey has not been created.") }
+          it { should have_content("can't be blank") }
         end
 
         describe "with valid data" do

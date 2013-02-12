@@ -1,40 +1,38 @@
 <% if user_signed_in? %>
-	<div class='span9'>
-		<h2>Surveys</h2>
-		
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Created</th>
+	<h2>Surveys</h2>
+	
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Created</th>
+				<% if current_user.admin? %>
+					<th>Actions</th>
+				<% end -%>
+			</tr>
+		</thead>
+		<tbody>
+		  <% @surveys.each do |survey| %>
+		    <tr>
+		    	<td><%= survey.id %></td>
+		    	<td><%= link_to survey.name, survey %></td>
+		    	<td><%= time_ago_in_words(survey.created_at) %> ago</td>
 					<% if current_user.admin? %>
-						<th>Actions</th>
-					<% end -%>
-				</tr>
-			</thead>
-			<tbody>
-			  <% @surveys.each do |survey| %>
-			    <tr>
-			    	<td><%= survey.id %></td>
-			    	<td><%= link_to survey.name, survey %></td>
-			    	<td><%= time_ago_in_words(survey.created_at) %> ago</td>
-						<% if current_user.admin? %>
-				    	<td>
-				    		<%= link_to "Edit", edit_survey_path(survey), 
-				    								class: 'btn btn-mini' %>
-								<%= link_to "Delete", survey_path(survey),
-								            method: :delete, confirm: "Are you sure?", 
-				    								class: 'btn btn-mini btn-danger' %>
-				    	</td>
-			    	<% end -%>
-			    </tr>
-			  <% end -%>
-			</tbody>
-		</table>
+			    	<td>
+			    		<%= link_to "Edit", edit_survey_path(survey), 
+			    								class: 'btn btn-mini' %>
+							<%= link_to "Delete", survey_path(survey),
+							            method: :delete, confirm: "Are you sure?", 
+			    								class: 'btn btn-mini btn-danger' %>
+			    	</td>
+		    	<% end -%>
+		    </tr>
+		  <% end -%>
+		</tbody>
+	</table>
 
-		<% if current_user.admin? %>
-			<%= link_to "New Survey", new_survey_path, class: 'btn btn-primary' %>
-		<% end %>
-	</div>
+	<% if current_user.admin? %>
+		<%= link_to "New Survey", new_survey_path, class: 'btn btn-primary' %>
+	<% end %>
 <% end -%>

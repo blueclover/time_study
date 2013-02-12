@@ -2,7 +2,7 @@
   <fieldset>
     <legend><%= controller.action_name.capitalize %> Activity Log</legend>
 
-    <%= f.input :start_date %>
+    <%= f.input :start_date, as: :datepicker %>
 
     <div class="form-actions">
       <%= f.submit nil, class: 'btn btn-primary' %>

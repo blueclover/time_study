@@ -34,10 +34,10 @@ class ActivityLogsController < ApplicationController
 
   def update
     if @activity_log.update_attributes(params[:activity_log])
-      flash[:success] = "Activity Log has been updated."
+      flash[:success] = "Activity log has been updated."
       redirect_to [@survey, @activity_log]
     else
-      flash[:error] = "Activity Log has not been updated."
+      flash[:error] = "Activity log has not been updated."
       render :edit
     end
   end

@@ -28,6 +28,8 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
 
+  gem 'jquery-ui-rails'
+
   gem 'twitter-bootstrap-rails'
   gem 'libv8'
   gem 'less-rails'

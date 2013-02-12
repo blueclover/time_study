@@ -1,7 +1,17 @@
 <% title(@survey.name, "Surveys") %>
-<div class='span9'>
-	<h2><%= @survey.name %></h2>
-	
+<h2><%= @survey.name %></h2>	
+<p>
+	<% if current_user.admin? %>
+	<%= link_to "Edit Survey", [:edit, @survey], 
+							class: 'btn' %>
+	<%= link_to "Delete Survey", @survey,
+	            method: :delete, confirm: "Are you sure?", 
+							class: 'btn btn-danger' %>
+	<% end -%>
+</p>
+<div class="span6 well" id="activity-logs">
+	<h3>Activity Logs</h3>
+
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -31,5 +41,4 @@
 		
 	<%= link_to "New Activity Log", new_survey_activity_log_path(@survey),
 							class: 'btn btn-primary' %>
-
 </div>
