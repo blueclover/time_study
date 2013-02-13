@@ -50,7 +50,7 @@ describe "Activity Log pages" do
     end
 
     describe "view" do
-      it { should have_content(log.user.email) }
+      it { should have_content("Activity Log Starting") }
     end
 
     # describe "edit" do

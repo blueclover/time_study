@@ -1,0 +1,19 @@
+<%= simple_form_for([@log_entry.activity_log, @log_entry]) do |f| %>
+	<%= f.input :date, as: :datepicker %>
+	<div class="span8" id="activities">
+		<table class="table">
+			<tbody>
+				<%= f.fields_for :activities, @activities do |a| %>
+					<tr>
+						<td><%= a.object.code %></td>
+						<td><%= a.object.name %></td>
+						<td><%= a.text_field :hours, class: 'hours' %></td>
+					</tr>
+				<% end -%>
+			</tbody>
+		</table>
+		<div class="actions">
+	    <%= f.submit "Save" %>
+	  </div>
+  <% end -%>
+</div>

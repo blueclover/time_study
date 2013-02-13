@@ -1,17 +1,22 @@
-<div id='activity_log'>
-  <h2><%= @activity_log.user.email %></h2>
-  <%= link_to "Edit Activity Log", [:edit, @survey, @activity_log] %>
-  <%= link_to "Delete Activity Log", [@survey, @activity_log],
-            method: :delete, confirm: "Are you sure?" %> 
-  <p>
-  	Activity Log Starting <%= @activity_log.start_date %>
-  </p>
-	<ul id='log-entries'>
+<% title("Activity Log") %>
+
+<h3>Activity Log Starting <%= @activity_log.start_date %></h3>
+<div class="span4" id="log-entries">
+	<table class="table">
+	<tbody>
 		<% @activity_log.log_entries.order(:date).each_with_index do |entry, i| %>
-			<li>
-				Day <%= i + 1 %> -
-				<%= link_to entry.date, [@activity_log, entry] %>
-			</li>
+			<tr>
+				<td><%= link_to "Day #{i + 1}", [@activity_log, entry] %></td>
+				<td><%= entry.date %></td>
+			</tr>
 		<% end %>
-	</ul>
+	</tbody>
 </div>
+
+<!-- <p>
+	<%= link_to "Edit Activity Log", [:edit, @survey, @activity_log], 
+							class: 'btn' %>
+	<%= link_to "Delete Activity Log", [@survey, @activity_log],
+	          method: :delete, confirm: "Are you sure?", 
+						class: 'btn btn-danger' %> 
+</p> -->

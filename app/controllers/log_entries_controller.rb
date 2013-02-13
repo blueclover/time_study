@@ -1,12 +1,26 @@
 class LogEntriesController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :find_activity_log
-	before_filter :find_log_entry, only: :show
+	before_filter :find_log_entry, only: [:show, :edit, :update, :destroy]
 
 	def show
 		# @activity_categories = ActivityCategory.order(:code)
 		@activities = @log_entry.activities.order(:id)
 	end
+
+  def edit
+    @activities = @log_entry.activities.order(:id)
+  end
+
+  def update
+    if @log_entry.update_attributes(params[:log_entry])
+      flash[:success] = "Log entry has been updated."
+      redirect_to [@activity_log, @log_entry]
+    else
+      flash[:error] = "Log entry has not been updated."
+      render :edit
+    end
+  end
 
 	private
     def find_activity_log
