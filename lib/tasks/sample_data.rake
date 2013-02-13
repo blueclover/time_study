@@ -50,7 +50,8 @@ def make_activity_logs
   users = User.all
   surveys.each do |survey|
     users.each_with_index do |user, n|
-      log = survey.activity_logs.build(start_date: n.days.ago)
+      date = Date.commercial(Date.today.year, n + 2, 1)
+      log = survey.activity_logs.build(start_date: date)
       log.user = user
       log.save!
     end

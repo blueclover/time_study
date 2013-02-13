@@ -46,7 +46,7 @@ describe "Activity Log pages" do
 
   describe "existing" do
     before do
-      click_link log.id.to_s
+      click_link log.user.email
     end
 
     describe "view" do
@@ -74,13 +74,13 @@ describe "Activity Log pages" do
     #   end
     # end
 
-    describe "delete" do
-      before do
-        click_link "Delete Activity Log"
-      end
+    # describe "delete" do
+    #   before do
+    #     click_link "Delete Activity Log"
+    #   end
       
-      it { should have_content "Activity Log has been deleted." }
-    end
+    #   it { should have_content "Activity Log has been deleted." }
+    # end
    
   end
   #

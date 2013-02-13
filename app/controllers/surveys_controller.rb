@@ -4,7 +4,7 @@ class SurveysController < ApplicationController
   before_filter :find_survey, only: [:show, :edit, :update, :destroy]
 
   def index
-    @surveys = Survey.all
+    @surveys = Survey.order(:id)
   end
 
   def new
@@ -23,7 +23,7 @@ class SurveysController < ApplicationController
   end
 
   def show
-
+    @activity_logs = @survey.activity_logs.order(:id)
   end
 
   def edit

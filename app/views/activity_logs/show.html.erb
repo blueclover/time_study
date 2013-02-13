@@ -1,18 +1,28 @@
 <% title("Activity Log") %>
 
-<h3>Activity Log Starting <%= @activity_log.start_date %></h3>
+<h3>Activity Log Starting <%= @activity_log.start_date.strftime('%B %e, %Y') %></h3>
 <div class="span4" id="log-entries">
 	<table class="table">
-	<tbody>
-		<% @activity_log.log_entries.order(:date).each_with_index do |entry, i| %>
-			<tr>
-				<td><%= link_to "Day #{i + 1}", [@activity_log, entry] %></td>
-				<td><%= entry.date %></td>
-			</tr>
-		<% end %>
-	</tbody>
+		<tbody>
+			<% @activity_log.log_entries.order(:date).each_with_index do |entry, i| %>
+				<% today = entry.date == Date.today %>
+				<tr <%= "class=highlight" if today %>>
+					<td>
+						<%= link_to "Day #{i + 1}", 
+										today ? [:edit, @activity_log, entry] : [@activity_log, entry] 
+							%>
+					</td>
+					<td><%= entry.date.strftime('%A, %b %e') %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
 </div>
-
+<div class="span6">
+	<p>
+		<%= link_to "Back to Survey", @survey, class: "btn" %>
+	</p>
+</div>
 <!-- <p>
 	<%= link_to "Edit Activity Log", [:edit, @survey, @activity_log], 
 							class: 'btn' %>
