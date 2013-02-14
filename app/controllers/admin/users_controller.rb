@@ -31,7 +31,7 @@ class Admin::UsersController < Admin::BaseController
 			params[:user].delete(:password)
 			params[:user].delete(:password_confirmation)
 		end
-		if @user.update_attributes(params[:user], :as => :admin)
+		if @user.update_attributes(params[:user], as: :admin)
 			flash[:notice] = "User has been updated."
 			redirect_to admin_users_path
 		else
