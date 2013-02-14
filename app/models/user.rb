@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :admin, as: :admin
 
+  belongs_to :county
   has_many :activity_logs, dependent: :destroy
 
   def timeout_in

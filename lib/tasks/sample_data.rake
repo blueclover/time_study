@@ -25,30 +25,31 @@ def make_users
                        password_confirmation: "password")
   admin.save!
   admin.toggle!(:admin)
-  5.times do |n|
-    #name  = Faker::Name.name
-    email = "user-#{n+1}@county.org"
-    password  = "password"
-    user = User.new(#name:     name,
-                 email:    email,
-                 password: password,
-                 password_confirmation: password)
-    #user.skip_confirmation!
-    user.save!
+  counties = County.all(limit: 2)
+  counties.each do |county|
+    5.times do |n|
+      #name  = Faker::Name.name
+      email = "probation_officer_#{n+1}@#{county.name.downcase}.org"
+      password  = "password"
+      county.users.create!(#name:     name,
+                     email:    email,
+                     password: password,
+                     password_confirmation: password)
+    end
   end
 end
 
 def make_surveys
   counties = County.all(limit: 10)
   counties.each do |county|
-    Survey.create!(name: "#{county.name} Survey Feb 2013")
+    county.surveys.create!(name: "#{county.name} Survey Feb 2013")
   end
 end
 
 def make_activity_logs
   surveys = Survey.all
-  users = User.all
   surveys.each do |survey|
+    users = User.where(county_id: survey.county.id)
     users.each_with_index do |user, n|
       date = Date.commercial(Date.today.year, n + 2, 1)
       log = survey.activity_logs.build(start_date: date)
