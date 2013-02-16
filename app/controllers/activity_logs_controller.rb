@@ -11,13 +11,7 @@ class ActivityLogsController < ApplicationController
     @activity_log = @survey.activity_logs.build(params[:activity_log])
     @activity_log.user = current_user
     if @activity_log.save
-      5.times do |n|
-        date = n.days.since(@activity_log.start_date).to_date
-        entry = @activity_log.log_entries.create!(date: date)
-        ActivityCategory.order(:code).each do |activity|
-          entry.activities.create!(activity_category: activity)
-        end
-      end
+      @activity_log.create_log_entries
       flash[:success] = "Activity log has been created."
       redirect_to [@survey, @activity_log]
     else
@@ -27,13 +21,19 @@ class ActivityLogsController < ApplicationController
   end
 
   def show
+    if @activity_log.unconfirmed
+      render :edit
+    end
   end
 
   def edit
   end
 
   def update
+    create_entries = true if @activity_log.unconfirmed
+    @activity_log.unconfirmed = false
     if @activity_log.update_attributes(params[:activity_log])
+      @activity_log.create_log_entries if create_entries
       flash[:success] = "Activity log has been updated."
       redirect_to [@survey, @activity_log]
     else

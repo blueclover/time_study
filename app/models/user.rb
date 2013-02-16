@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :trackable, :validatable, :timeoutable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :email, :password, :password_confirmation, :county_id
   # attr_accessible :title, :body
 
   attr_accessible :email, :password, :admin, :county_id, as: :admin

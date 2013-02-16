@@ -4,6 +4,8 @@ FactoryGirl.define do
     password "password"
     password_confirmation "password"
 
+    county
+
     factory :admin do
       admin true
     end
@@ -22,5 +24,9 @@ FactoryGirl.define do
   factory :log_entry do
     activity_log
     sequence(:date) { |n| n.days.from_now }
+  end
+
+  factory :county do
+    sequence(:name) { |n| "Example survey #{n}" }
   end
 end

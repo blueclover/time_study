@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130214185018) do
+ActiveRecord::Schema.define(:version => 20130215225837) do
 
   create_table "activities", :force => true do |t|
     t.integer  "log_entry_id"
@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(:version => 20130214185018) do
     t.date     "start_date"
     t.integer  "user_id"
     t.integer  "survey_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "unconfirmed", :default => false
   end
 
   add_index "activity_logs", ["survey_id"], :name => "index_activity_logs_on_survey_id"
@@ -45,6 +46,8 @@ ActiveRecord::Schema.define(:version => 20130214185018) do
   create_table "counties", :force => true do |t|
     t.string "name"
   end
+
+  add_index "counties", ["name"], :name => "index_counties_on_name", :unique => true
 
   create_table "log_entries", :force => true do |t|
     t.date     "date"

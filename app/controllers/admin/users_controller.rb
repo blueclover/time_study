@@ -18,7 +18,6 @@ class Admin::UsersController < Admin::BaseController
 			flash[:notice] = "User has been created."
 			redirect_to admin_users_path
 		else
-			flash.now[:alert] = "User has not been created."
 			render :new
 		end
   end
@@ -35,7 +34,6 @@ class Admin::UsersController < Admin::BaseController
 			flash[:notice] = "User has been updated."
 			redirect_to admin_users_path
 		else
-			flash[:alert] = "User has not been updated."
 			render :edit
 		end
   end

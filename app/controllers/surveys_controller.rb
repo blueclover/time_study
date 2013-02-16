@@ -1,6 +1,5 @@
 class SurveysController < ApplicationController
-  before_filter :authenticate_user!, only: [:index, :show]
-  before_filter :authorize_admin!, except: [:index, :show]
+  before_filter :authorize_admin!
   before_filter :find_survey, only: [:show, :edit, :update, :destroy]
 
   def index
