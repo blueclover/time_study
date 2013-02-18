@@ -5,11 +5,19 @@ class ActivityLogsController < ApplicationController
 
   def new
     @activity_log = @survey.activity_logs.build
+    @users = User.where(county_id: @survey.county_id)
   end
 
   def create
+    user_id = params[:activity_log][:user_id]
+    if params[:activity_log][:user_id].blank?
+      user_id = current_user.id
+    end
+    params[:activity_log].delete(:user_id)
+
     @activity_log = @survey.activity_logs.build(params[:activity_log])
-    @activity_log.user = current_user
+    @activity_log.user_id = user_id
+
     if @activity_log.save
       @activity_log.create_log_entries
       flash[:success] = "Activity log has been created."
@@ -22,7 +30,7 @@ class ActivityLogsController < ApplicationController
 
   def show
     if @activity_log.unconfirmed
-      render :edit
+      redirect_to [:edit, @survey, @activity_log]
     end
   end
 

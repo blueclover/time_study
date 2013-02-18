@@ -14,7 +14,7 @@ class Survey < ActiveRecord::Base
 
   private
   	def create_logs
-  		if create_with_logs
+  		if create_with_logs == true
   			users = User.where(county_id: county_id)
   			if date = default_start_date.to_date
   				users.each do |user|

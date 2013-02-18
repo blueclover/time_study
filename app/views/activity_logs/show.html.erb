@@ -18,11 +18,13 @@
 		</tbody>
 	</table>
 </div>
-<div class="span6">
-	<p>
-		<%= link_to "Back to Survey", @survey, class: "btn" %>
-	</p>
-</div>
+<% if current_user.admin %>
+	<div class="span6">
+		<p>
+			<%= link_to "Back to Survey", @survey, class: "btn" %>
+		</p>
+	</div>
+<% end -%>
 <!-- <p>
 	<%= link_to "Edit Activity Log", [:edit, @survey, @activity_log], 
 							class: 'btn' %>

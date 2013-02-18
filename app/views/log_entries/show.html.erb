@@ -1,4 +1,4 @@
-<h3><%= @log_entry.date %>
+<h3><%= @log_entry.date.strftime('%A, %B %e, %Y') %>
 	<%= link_to "Edit", [:edit, @activity_log, @log_entry], 
 							class: 'btn btn-mini' if @log_entry.date < Date.tomorrow %></h3>
 <div class="span8" id="activities">

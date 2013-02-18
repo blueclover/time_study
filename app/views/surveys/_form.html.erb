@@ -3,13 +3,14 @@
     <legend><%= controller.action_name.capitalize %> Survey</legend>
 
     <%= f.input :name %>
-    <%= f.association :county %>
     <%= f.input :description %>
-    <%= f.input :create_with_logs, label: "Create logs for all users?",
-    						as: :boolean %>
-    <%= f.input :default_start_date, as: :datepicker,
-    						hint: "Leave blank to specify start dates individually" %>
-
+    <% if @survey.new_record? %>
+      <%= f.association :county %>
+      <%= f.input :create_with_logs, label: "Create logs for all users?",
+      						as: :boolean, default: true %>
+      <%= f.input :default_start_date, as: :datepicker,
+      						hint: "Leave blank if you wish to specify start dates individually" %>
+    <% end -%>
     <div class="form-actions">
       <%= f.submit nil, class: 'btn btn-primary' %>
       <%= link_to 'Cancel', surveys_path, class: 'btn' %>
