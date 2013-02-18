@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130215225837) do
+ActiveRecord::Schema.define(:version => 20130218192711) do
 
   create_table "activities", :force => true do |t|
     t.integer  "log_entry_id"
@@ -49,6 +49,10 @@ ActiveRecord::Schema.define(:version => 20130215225837) do
 
   add_index "counties", ["name"], :name => "index_counties_on_name", :unique => true
 
+  create_table "job_classifications", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "log_entries", :force => true do |t|
     t.date     "date"
     t.integer  "activity_log_id"
@@ -83,10 +87,12 @@ ActiveRecord::Schema.define(:version => 20130215225837) do
     t.datetime "updated_at",                                :null => false
     t.boolean  "admin",                  :default => false
     t.integer  "county_id"
+    t.integer  "job_classification_id"
   end
 
   add_index "users", ["county_id"], :name => "index_users_on_county_id"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["job_classification_id"], :name => "index_users_on_job_classification_id"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

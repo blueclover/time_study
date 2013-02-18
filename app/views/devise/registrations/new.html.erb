@@ -5,6 +5,7 @@
 
   <div class="form-inputs">
   	<%= f.association :county %>
+    <%= f.association :job_classification %>
     <%= f.input :email, :required => true, :autofocus => true %>
     <%= f.input :password, :required => true %>
     <%= f.input :password_confirmation, :required => true %>

@@ -6,15 +6,19 @@ class User < ActiveRecord::Base
          :trackable, :validatable, :timeoutable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :county_id
+  attr_accessible :email, :password, :password_confirmation,
+                  :county_id, :job_classification_id
   # attr_accessible :title, :body
 
-  attr_accessible :email, :password, :admin, :county_id, as: :admin
+  attr_accessible :email, :password, :admin, :county_id,
+                  :job_classification_id, as: :admin
 
   belongs_to :county
+  belongs_to :job_classification
   has_many :activity_logs, dependent: :destroy
 
   validates :county_id, presence: :true, unless: :admin
+  validates :job_classification_id, presence: :true, unless: :admin
 
   def timeout_in
     30.minutes

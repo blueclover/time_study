@@ -1,12 +1,15 @@
 <%= simple_form_for [:admin, @user] do |f| %>
   <%= f.error_notification %>
 
-	<%= f.association :county %>
-	<%= f.input :email %>
-	<%= f.input :password %>
-	<%= f.input :admin %>
+	<fieldset>
+		<%= f.association :county %>
+		<%= f.association :job_classification %>
+		<%= f.input :email %>
+		<%= f.input :password %>
+		<%= f.input :admin %>
 
-  <div class="form-actions">
-		<%= f.submit %>
-	</div>
+	  <div class="form-actions">
+			<%= f.submit %>
+		</div>
+	</fieldset>
 <% end %>

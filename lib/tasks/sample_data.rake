@@ -1,8 +1,9 @@
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
-    make_counties
-    make_activity_categories
+    populate_table('counties', false)
+    populate_table('job_classifications', false)
+    populate_table('activity_categories')
     make_users
     make_surveys
     make_activity_logs
@@ -10,31 +11,26 @@ namespace :db do
   end
 end
 
-def make_counties
-  populate_table('counties', false)
-end
-
-def make_activity_categories
-  populate_table('activity_categories')
-end
-
 def make_users
   admin = User.new(#name:     "Example User",
                        email:    "admin@county.org",
                        password: "password",
                        password_confirmation: "password")
+  admin.admin = true
   admin.save!
-  admin.toggle!(:admin)
   counties = County.all(limit: 2)
+  jobs = JobClassification.all
   counties.each do |county|
-    5.times do |n|
+    jobs.each do |job|
       #name  = Faker::Name.name
-      email = "probation_officer_#{n+1}@#{county.name.downcase}.org"
+      email = "#{job.name.parameterize}@#{county.name.parameterize}.org"
       password  = "password"
-      county.users.create!(#name:     name,
-                     email:    email,
-                     password: password,
-                     password_confirmation: password)
+      user = county.users.build(#name:     name,
+                                email:    email,
+                                password: password,
+                                password_confirmation: password)
+      user.job_classification = job
+      user.save!
     end
   end
 end
