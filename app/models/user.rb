@@ -28,6 +28,10 @@ class User < ActiveRecord::Base
     self.county.name if county
   end
 
+  def job_title
+    self.job_classification.name if job_classification
+  end
+
   def role
     self.admin? ? "Admin" : "User"
   end

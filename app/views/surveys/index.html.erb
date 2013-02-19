@@ -1,4 +1,4 @@
-<% if user_signed_in? %>
+<div class='span10'>
 	<h2>Surveys</h2>
 	
 	<table class="table table-striped">
@@ -33,8 +33,5 @@
 		  <% end -%>
 		</tbody>
 	</table>
-
-	<% if current_user.admin? %>
-		<%= link_to "New Survey", new_survey_path, class: 'btn btn-primary' %>
-	<% end %>
-<% end -%>
+	<%= link_to "New Survey", new_survey_path, class: 'btn btn-primary' %>
+</div>

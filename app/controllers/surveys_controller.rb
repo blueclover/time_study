@@ -1,6 +1,6 @@
 class SurveysController < ApplicationController
   before_filter :authorize_admin!
-  before_filter :find_survey, only: [:show, :edit, :update, :destroy]
+  before_filter :find_survey, except: [:index, :new, :create]
 
   def index
     @surveys = Survey.order(:id)
@@ -43,6 +43,10 @@ class SurveysController < ApplicationController
     @survey.destroy
     flash[:notice] = "Survey has been deleted."
     redirect_to surveys_path
+  end
+
+  def summary_table
+    @table = @survey.summary_table.sort_by { |x| x[0][:code] }
   end
 
   private

@@ -21,17 +21,21 @@ def make_users
   counties = County.all(limit: 2)
   jobs = JobClassification.all
   counties.each do |county|
+    staff_count = 1
     jobs.each do |job|
-      #name  = Faker::Name.name
-      email = "#{job.name.parameterize}@#{county.name.parameterize}.org"
-      password  = "password"
-      user = county.users.build(#name:     name,
-                                email:    email,
-                                password: password,
-                                password_confirmation: password)
-      user.job_classification = job
-      user.save!
-    end
+      staff_count.times do |n|
+        #name  = Faker::Name.name
+        email = "#{job.name.parameterize}_#{n+1}@#{county.name.parameterize}.org"
+        password  = "password"
+        user = county.users.build(#name:     name,
+                                  email:    email,
+                                  password: password,
+                                  password_confirmation: password)
+        user.job_classification = job
+        user.save!
+      end
+      staff_count *= 3
+    end    
   end
 end
 
@@ -44,10 +48,11 @@ end
 
 def make_activity_logs
   surveys = Survey.all
+  date = Date.commercial(Date.today.year, Date.today.cweek - 1, 1)
   surveys.each do |survey|
     users = User.where(county_id: survey.county.id)
     users.each_with_index do |user, n|
-      date = Date.commercial(Date.today.year, n + 2, 1)
+      # date = Date.commercial(Date.today.year, n + 2, 1)
       log = survey.activity_logs.build(start_date: date)
       log.user = user
       log.save!
@@ -62,7 +67,9 @@ def make_log_entries
       date = n.days.since(log.start_date).to_date
       entry = log.log_entries.create!(date: date)
       ActivityCategory.order(:code).each do |activity|
-        entry.activities.create!(activity_category: activity)
+        hours = rand(40)/4.0 - 6
+        hours = 0 if hours < 0
+        entry.activities.create!(activity_category: activity, hours: hours)
       end
     end
   end

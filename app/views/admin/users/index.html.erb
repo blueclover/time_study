@@ -3,10 +3,12 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>ID</th>
-			<th>Email</th>
-			<th>County</th>
-			<th>Role</th>
+			<th><%= link_to 'ID', admin_users_path(sort: 'id') %></th>
+			<th><%= link_to 'Email', admin_users_path(sort: 'email') %></th>
+			<th><%= link_to 'County', admin_users_path(sort: 'county') %></th>
+			<th><%= link_to 'Job Title', 
+											admin_users_path(sort: 'job_classification') %></th>
+			<th><%= link_to 'Role', admin_users_path(sort: 'role') %></th>
 			<th>Actions</th>
 		</tr>
 	</thead>
@@ -14,8 +16,9 @@
 	  <% @users.each do |user| %>
 	    <tr>
 	    	<td><%= user.id %></td>
-	    	<td><%= link_to user.email, [:admin, user] %></td>
+	    	<td><%= user.email %></td>
 	    	<td><%= user.county_name %></td>
+	    	<td><%= user.job_title %></td>
 	    	<td><%= user.role %></td>
 	    	<td>
 	    		<%= link_to "View", [:admin, user], 

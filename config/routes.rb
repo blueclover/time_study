@@ -6,6 +6,10 @@ TimeStudy::Application.routes.draw do
 
   resources :surveys do
     resources :activity_logs
+
+    member do
+      get :summary_table
+    end
   end
 
   resources :activity_logs do

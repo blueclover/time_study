@@ -2,7 +2,18 @@ class Admin::UsersController < Admin::BaseController
 	before_filter :find_user, :only => [:show, :edit, :update, :destroy]
 
   def index
-  	@users = User.all(order: "email")
+    sort = params[:sort] || 'id'
+    case sort
+    when 'id', 'email', 'role'
+      sort = 'admin DESC' if sort == 'role'
+      @users = User.all(order: sort)
+    when 'county', 'job_classification'
+      table = sort.pluralize
+      join_sql = "LEFT OUTER JOIN #{table} on #{table}.id = users.#{sort}_id"
+  	  @users = User.joins(join_sql).order("#{sort.pluralize}.name")
+    else
+      @users = User.all
+    end
   end
 
   def show
