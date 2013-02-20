@@ -10,7 +10,15 @@ class Survey < ActiveRecord::Base
   validates :name, presence: true
   validates :county_id, presence: true
 
-  attr_accessor :create_with_logs, :default_start_date
+  attr_reader :create_with_logs, :default_start_date
+
+  def create_with_logs=(value)
+    @create_with_logs = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(value)
+  end
+
+  def default_start_date=(value)
+    @default_start_date = value.to_date
+  end
 
   after_create :create_logs
 
@@ -20,9 +28,9 @@ class Survey < ActiveRecord::Base
 
   private
   	def create_logs
-  		if create_with_logs == true
+  		if create_with_logs
   			users = User.where(county_id: county_id)
-  			if date = default_start_date.to_date
+  			if date = default_start_date
   				users.each do |user|
   					log = self.activity_logs.build(start_date: date)
   					log.user = user

@@ -5,6 +5,7 @@ FactoryGirl.define do
     password_confirmation "password"
 
     county
+    job_classification
 
     factory :admin do
       admin true
@@ -28,5 +29,9 @@ FactoryGirl.define do
 
   factory :county do
     sequence(:name) { |n| "Example survey #{n}" }
+  end
+
+  factory :job_classification do
+    sequence(:name) { |n| "Job #{n}" }
   end
 end

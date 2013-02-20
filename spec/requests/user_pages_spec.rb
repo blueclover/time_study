@@ -22,12 +22,14 @@ describe "User pages" do
 			  click_button "Create User"
 			end
 
-			it { should have_content("User has not been created.") }
-			it { should have_content("Email can't be blank") }
+			it { should have_content("Please review the problems below:") }
+			it { should have_content("can't be blank") }
 		end
 
 		describe "with valid input" do
 			before do
+				page.select(user.county.name, from: "County")
+				page.select(user.job_classification.name, from: "Job classification")
 			  fill_in "Email", with: "new@county.org"
 			  fill_in "Password", with: "password"
 			end
@@ -35,22 +37,25 @@ describe "User pages" do
 			describe "with 'Admin' unchecked" do
 				before { click_button "Create User" }
 				it { should have_content("User has been created.") }
-				it { should have_content("new@county.org (User)") }
+				it { should have_content("new@county.org") }
 			end
 
 			describe "with 'Admin' checked" do
 				before do
-				  check "Admin?"
+				  check "Admin"
 				  click_button "Create User" 
 				end
 				it { should have_content("User has been created.") }
-				it { should have_content("new@county.org (Admin)") }
+				it { should have_content("new@county.org") }
 			end
 		end
 	end
 
 	describe "modifying existing user" do
-		before { click_link user.email }
+		# click 'View' on row with user's email
+		before do
+		 find(:xpath, "//tr[contains(.,'#{user.email}')]/td/a", text: 'View').click
+		end
 
 		describe "editing a user" do
 			before { click_link "Edit User" }
@@ -74,7 +79,7 @@ describe "User pages" do
 	end
 
 	describe "modifying current user" do
-		before { click_link admin.email }
+		before { find(:xpath, "//tr[contains(.,'#{admin.email}')]/td/a", text: 'View').click}
 			
 		it { should_not have_link "Delete User" }
 	end

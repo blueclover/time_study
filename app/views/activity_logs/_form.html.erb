@@ -3,7 +3,7 @@
     <legend><%= controller.action_name.capitalize %> Activity Log</legend>
 
     <%= f.input :start_date, as: :datepicker %>
-    <% if current_user.admin %>
+    <% if @activity_log.new_record? && current_user.admin %>
 	    <%= f.input :user_id, collection: @users %>
 	  <% end -%>
 

@@ -1,7 +1,7 @@
 class ActivityLogsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_survey
-  before_filter :find_activity_log, only: [:show, :edit, :update, :destroy]
+  before_filter :find_survey, except: [:summary_table]
+  before_filter :find_activity_log, except: [:index, :new, :create]
 
   def new
     @activity_log = @survey.activity_logs.build
@@ -56,6 +56,10 @@ class ActivityLogsController < ApplicationController
     redirect_to @survey
   end
 
+  def summary_table
+    @table = @activity_log.summary_table.sort_by { |x| x[0][:code] }
+  end
+
   private
     def find_survey
       @survey = Survey.find(params[:survey_id])
@@ -66,7 +70,11 @@ class ActivityLogsController < ApplicationController
     end
 
     def find_activity_log
-      @activity_log = @survey.activity_logs.find(params[:id])
+      if @survey
+        @activity_log = @survey.activity_logs.find(params[:id])
+      else
+        @activity_log = ActivityLog.find(params[:id])
+      end
     rescue ActiveRecord::RecordNotFound
       flash[:alert] = "The record you were looking" +
           " for could not be found."

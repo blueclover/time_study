@@ -5,10 +5,15 @@ class ActivityLog < ActiveRecord::Base
   belongs_to :user
 
   has_many :log_entries, dependent: :destroy
+  has_many :activities, through: :log_entries
 
   validates :user, presence: true
   validates :start_date, presence: true, unless: :unconfirmed
 
+  def summary_table
+    activities.joins(:activity_category).sum(:hours, group: :activity_category)
+  end
+  
   def create_log_entries
   	5.times do |n|
       date = n.days.since(self.start_date).to_date

@@ -1,45 +1,41 @@
-<h2>Users</h2>
+<div class='span10'>
+	<h2>Users</h2>
 
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th><%= link_to 'ID', admin_users_path(sort: 'id') %></th>
-			<th><%= link_to 'Email', admin_users_path(sort: 'email') %></th>
-			<th><%= link_to 'County', admin_users_path(sort: 'county') %></th>
-			<th><%= link_to 'Job Title', 
-											admin_users_path(sort: 'job_classification') %></th>
-			<th><%= link_to 'Role', admin_users_path(sort: 'role') %></th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	<tbody>
-	  <% @users.each do |user| %>
-	    <tr>
-	    	<td><%= user.id %></td>
-	    	<td><%= user.email %></td>
-	    	<td><%= user.county_name %></td>
-	    	<td><%= user.job_title %></td>
-	    	<td><%= user.role %></td>
-	    	<td>
-	    		<%= link_to "View", [:admin, user], 
-	    								class: 'btn btn-mini' %>
-	    		<%= link_to "Edit", [:edit, :admin, user], 
-	    								class: 'btn btn-mini' %>
-	    		<% unless user == current_user %>
-						<%= link_to "Delete", [:admin, user],
-						            method: :delete, confirm: "Are you sure?", 
-		    								class: 'btn btn-mini btn-danger' %>
-		    	<% end -%>
-	    	</td>
-	    </tr>
-	  <% end -%>
-	</tbody>
-</table>
-<%= link_to "New User", new_admin_user_path,
-							class: 'btn btn-primary' %>
-<!--
-# <ul id='users'>
-# 	<% @users.each do |user| %>
-# 	<li><%= link_to user, [:admin, user] %></li>
-# 	<% end %>
-# </ul> -->
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th><%= link_to 'ID', admin_users_path(sort: 'id') %></th>
+				<th><%= link_to 'Email', admin_users_path(sort: 'email') %></th>
+				<th><%= link_to 'County', admin_users_path(sort: 'county') %></th>
+				<th><%= link_to 'Job Title', 
+												admin_users_path(sort: 'job_classification') %></th>
+				<th><%= link_to 'Role', admin_users_path(sort: 'role') %></th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+		  <% @users.each do |user| %>
+		    <tr>
+		    	<td><%= user.id %></td>
+		    	<td><%= user.email %></td>
+		    	<td><%= user.county_name %></td>
+		    	<td><%= user.job_title %></td>
+		    	<td><%= user.role %></td>
+		    	<td>
+		    		<%= link_to "View", [:admin, user], 
+		    								class: 'btn btn-mini' %>
+		    		<%= link_to "Edit", [:edit, :admin, user], 
+		    								class: 'btn btn-mini' %>
+		    		<% unless user == current_user %>
+							<%= link_to "Delete", [:admin, user],
+							            method: :delete, confirm: "Are you sure?", 
+			    								class: 'btn btn-mini btn-danger' %>
+			    	<% end -%>
+		    	</td>
+		    </tr>
+		  <% end -%>
+		</tbody>
+	</table>
+	<%= link_to "New User", new_admin_user_path,
+								class: 'btn btn-primary' %>
+</div>
