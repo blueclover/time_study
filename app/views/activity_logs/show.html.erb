@@ -2,10 +2,6 @@
 <div class='span10'>
 	<h3>Activity Log Starting 
 		<%= @activity_log.start_date.strftime('%B %e, %Y') %></h3>
-		<% if @activity_log.start_date < 5.days.ago.to_date %>
-			<%= link_to "View Summary", summary_table_activity_log_path(@activity_log),
-								class: "btn" %>
-		<% end -%>
 </div>
 <div class='span5'>
 	<div class="span4" id="log-entries">
@@ -28,6 +24,11 @@
 	<% if current_user.admin %>
 			<p>
 				<%= link_to "Back to Survey", @survey, class: "btn" %>
+				<% if @activity_log.start_date < 5.days.ago.to_date %>
+					<%= link_to "View Summary", 
+											summary_table_activity_log_path(@activity_log),
+										class: "btn" %>
+				<% end -%>
 			</p>
 	<% end -%>
 </div>

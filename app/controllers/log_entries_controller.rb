@@ -17,7 +17,6 @@ class LogEntriesController < ApplicationController
       flash[:success] = "Log entry has been updated."
       redirect_to [@activity_log, @log_entry]
     else
-      flash[:error] = "Log entry has not been updated."
       render :edit
     end
   end

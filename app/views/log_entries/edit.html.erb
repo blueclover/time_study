@@ -1,7 +1,8 @@
 <div class='span10'>
-	<h3><%= @log_entry.date %></h3>
+	<h3><%= @log_entry.date.strftime('%A, %B %e, %Y') %></h3>
 
 	<%= simple_form_for([@log_entry.activity_log, @log_entry]) do |f| %>
+		<%= f.error_notification %>
 		<div class="span8" id="activities">
 			<table class="table">
 				<tbody>
@@ -15,6 +16,8 @@
 				</tbody>
 			</table>
 			<div class="form-actions">
+				<%= f.input :signed, as: :boolean,
+										label: "I hereby certify that the above information is true and correct to the best of my knowledge." %>
 		    <%= f.submit "Save", class: 'btn btn-primary' %>
 		    <%= link_to "Cancel", :back, class: "btn" %>
 		  </div>
