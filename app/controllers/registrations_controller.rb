@@ -8,18 +8,18 @@ class RegistrationsController < Devise::RegistrationsController
   	params[:user].delete(:county_id)
 
   	if county.blank?
-  		# complain
+  		@user = User.new(params[:user])
   	else
 			@user = county.users.new(params[:user])
-			if @user.save
-				sign_in(:user, @user)
-				flash[:notice] = "User has been created."
-				redirect_to root_path
-			else
-				render :new
-			end
-		end
-
+    end
+    
+    if @user.save
+      sign_in(:user, @user)
+      flash[:notice] = "User has been created."
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def update

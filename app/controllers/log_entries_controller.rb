@@ -17,6 +17,7 @@ class LogEntriesController < ApplicationController
       flash[:success] = "Log entry has been updated."
       redirect_to [@activity_log, @log_entry]
     else
+      @log_entry.signed = false
       render :edit
     end
   end

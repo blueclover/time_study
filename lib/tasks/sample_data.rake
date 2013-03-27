@@ -4,6 +4,7 @@ namespace :db do
     populate_table('counties', false)
     populate_table('job_classifications', false)
     populate_table('activity_categories')
+    populate_table('response_options')
     make_users
     make_surveys
     make_activity_logs
@@ -100,5 +101,12 @@ def populate_table(table, timestamps=true)
         "VALUES " +
         "(#{sql_vals.join(',')}#{timestamp_values})"
     ActiveRecord::Base.connection.insert(sql)
+  end
+
+  if field_names.include?('id')
+    sql = "WITH mx AS ( SELECT MAX(id) AS id FROM public.response_options) " +
+        "SELECT setval('public.response_options_id_seq', mx.id) AS curseq " +
+        "FROM mx;"
+    ActiveRecord::Base.connection.execute(sql)
   end
 end

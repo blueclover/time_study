@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe SurveysController do
-	let(:user)   { create(:user) }
+	let(:admin)   { create(:admin) }
+	let(:user)    { create(:user) }
 
 	# create a mock model of a survey
 	# (will raise an error if any methods are called on it)
@@ -20,9 +21,9 @@ describe SurveysController do
 		actions.each do |action, method|
 			it "cannot access the #{action} action" do
 				send(method, action, id: survey.id)
-				response.should redirect_to(root_path)		
-				message = "You must be an admin to do that."
-				flash[:alert].should == message
+				response.should redirect_to(new_user_session_path)		
+				# message = "Your county does not have any active surveys."
+				# flash[:alert].should == message
 			end
 		end
 	end
@@ -37,9 +38,9 @@ describe SurveysController do
 	    specify { flash[:alert].should == message }
 	  end
 
-  	context "standard users" do
+  	context "admins" do
 	    before do
-	    	sign_in(:user, user)
+	    	sign_in(:user, admin)
 	     	get :show, id: "not-here"
 	    end
 

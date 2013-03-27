@@ -1,0 +1,59 @@
+id,related_question,description,parent_id,activity_category_id
+1,1,Providing Direct Care or Targeted Case Management,,
+2,2,Conducting assessments/medical exams/chart reviews,1,4
+3,2,"Developing Individual Service Plans (ISP), plans of care, and/or treatment plans",1,4
+4,2,Providing counseling or therapy services,1,4
+5,2,"Administering medication, immunization, first aid or emergency care",1,4
+6,2,Performing a Targeted Case Management (TCM) billable activity,1,4
+7,2,Providing supervision or consultation on an individual TCM billable activity,1,4
+8,3,Resident of a Developmental Center or ICF/MR,,
+9,3,"Individual, family or guardian",,
+10,3,Stakeholders from non-governmental organizations,,
+11,3,County board or COG staff,,
+12,3,Provider,,
+13,3,State agency staff,,
+14,3,No one,,
+15,3,A combination of individuals above,,
+16,1,Conducting outreach,,
+17,2,"Preparing/providing information about Medicaid eligibility requirements or availability of Medicaid services to individuals, organizations, or community groups",16,1
+18,2,"Preparing/providing information about eligibility requirements or availability of non-Medicaid services, such as supported living, family support services, housing opportunities, etc.",16,2
+19,2,"Preparing/providing information about general health, legal, or social programs",16,3
+20,1,Facilitating eligibility determinations,,
+21,2,Assisting an individual and/or the family/guardian with the Medicaid eligibility or waiver enrollment process,20,1
+22,2,"Determining an individual's eligibility for supported living, family support services, housing, or other non-Medicaid programs",20,1
+23,2,Work related to OEDI/COEDI determinations,20,2
+24,1,Coordinating Current Services,,
+25,2,"Performing any work related to PAWS, such as maintaining and distributing PAWS information, communicating with the department about PAWS issues, reconciling waiver match commitment, or preparing and submitting information to the department for PAWS entry",24,5
+26,2,"Preparing Prior Authorization Request (PAR) and administrative reviews for adult day services, as well as supporting materials for these processes",24,6
+27,2,Scheduling and gathering information for evaluations/assessments of Medicaid services,24,5
+28,2,Scheduling and gathering information for evaluations/assessments of non-Medicaid services,24,7
+29,2,"Providing fiscal (i.e., reporting, analysis, processing payments, technical assistance...) that support waiver services, CPT, IDS, DRA, or other Medicaid programs",24,5
+30,2,"Providing program support for support of waivers, CPT, IDS, DRA, or other Medicaid programs",24,8
+31,2,"Providing fiscal or program support for grants (TXX), supported living, family support services, housing opportunities, or other non-Medicaid programs",24,5
+32,2,"Collecting/maintaining data related to IIF/IDS, PICT, waiting lists or waiver slots",24,4
+33,1,Work related to Monitoring/Quality Assurance,,
+34,2,"Monitoring the effectiveness of Medicaid-covered services, including client satisfaction surveys for medical, dental, mental health services",33,1
+35,2,Providing technical assistance regarding Medicaid-funded programs,33,5
+36,2,"Providing technical assistance regarding non-Medicaid programs such as grants, family support services, supported living, etc.",33,3
+37,2,Assisting with auditor’s review of waiver programs (external monitoring),33,5
+38,2,"Assisting with auditor’s review of non-Medicaid programs (such as single state audits by Auditor of State, or TXX subrecipient monitoring)",33,4
+39,2,Performing Medicaid system quality assessment reviews,33,7
+40,2,Performing quality assessment reviews for non-Medicaid programs,33,5
+41,2,Implementation and review outcomes of waiver provider compliance and monitoring process,33,8
+42,2,Performing activities related to provider suspension or revocation,33,5
+43,2,"Recruitment, training, and maintenance of a pool of providers, including maintenance of provider files",33,1
+44,1,Work related to Major Unusual Incidents or Unusual Incidents,,
+45,2,"Engaging in travel, preparation for or planning of a review or investigation, gathering information, legal review, filing, follow-up, or other work related to MUI/UI reviews/investigations",44,1
+46,2,Reviewing Unusual Incident Reports and/or assessing pattern/trend analysis,44,4
+47,2,Performing proactive/prevention filing,44,2
+48,2,Review/analyze MUI/UI reports for trends/patterns,44,3
+49,2,Performing clerical work in support of investigating or monitoring MUI/UI,44,4
+50,2,"Organizing, conducting, or attending a training related to MUI/UI",44,5
+51,1,Performing a general administrative task that cannot be directly assigned to a program,,
+52,2,Reading/responding to general emails or phone calls not related to a program,51,4
+53,2,"Attending, facilitating or preparing for staff meetings or trainings regarding topics not related to a program",51,2
+54,2,"Performing business-related activities, such as approving time, leave, conducting performance reviews, interviews, budgeting, fleet management, payroll, accounts payable and receivable, IT security and maintenance, etc.",51,1
+55,1,Not Working,,
+56,,On paid leave or break or lunch,55,8
+57,,Not scheduled to work,55,8
+58,,on unpaid leave or break or lunch,55,8

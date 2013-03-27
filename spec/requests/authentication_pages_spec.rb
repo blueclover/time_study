@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Authenication pages" do
   subject { page }
 
-  let!(:admin) { create(:admin, email: "admin@alameda.org") }
+  let!(:admin)  { create(:admin, email: "admin@alameda.org") }
 
   before do
     visit root_path
@@ -27,11 +27,12 @@ describe "Authenication pages" do
 
     describe "with invalid data" do
       before do
+        page.select(admin.county.name, from: "County")
         fill_in "Email", with: ""
         click_button "Sign Up"
       end
 
-      it { should have_content("Email can't be blank") }
+      it { should have_content("can't be blank") }
     end
   end
 

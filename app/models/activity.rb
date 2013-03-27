@@ -6,4 +6,7 @@ class Activity < ActiveRecord::Base
 
   delegate :code, :name, to: :activity_category
 
+  #validates_numericality_of :hours if :hours
+  validates_numericality_of :hours, on: :update 
+
 end

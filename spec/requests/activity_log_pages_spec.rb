@@ -5,11 +5,12 @@ describe "Activity Log pages" do
 
   survey_name = "Test Survey"
   let!(:survey) { create(:survey, name: survey_name) }
-  let!(:user) { create(:user) }
-  let!(:log) { create(:activity_log, survey: survey) }
+  let!(:user)   { create(:user) }
+  let!(:admin)  { create(:admin) }
+  let!(:log)    { create(:activity_log, survey: survey) }
 
   before do
-    sign_in_as!(user)
+    sign_in_as!(admin)
     visit root_path
     click_link survey_name
   end
@@ -34,14 +35,14 @@ describe "Activity Log pages" do
       it { should have_content("Start datecan't be blank") }
     end
 
-    # describe "with valid input" do
-    #   before do
-    #     fill_in 'Start date', with: 2.days.ago.strftime("%m/%d/%Y")
-    #     click_button 'Create Activity log'
-    #   end
+    describe "with valid input" do
+      before do
+        find(:xpath, "//input[@class='start_date-alt']").set 2.days.ago.strftime("%Y-%m-%d")
+        click_button 'Create Activity log'
+      end
 
-    #   it { should have_content('Activity log has been created.') }
-    # end
+      it { should have_content('Activity log has been created.') }
+    end
   end
 
   describe "existing" do

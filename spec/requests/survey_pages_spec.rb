@@ -5,8 +5,9 @@ describe "Survey pages" do
 
   survey_name = "Test Survey"
   let!(:survey) { create(:survey, name: survey_name) }
-  let(:user) { create(:user) }  
-  let(:admin) { create(:admin) }  
+  let!(:county)  { create(:county) }
+  let(:user)    { create(:user) }  
+  let(:admin)   { create(:admin) }  
 
   describe "index" do 
     context "anonymous users" do
@@ -19,15 +20,14 @@ describe "Survey pages" do
 
     end
     context "regular users" do
+
       before do
         sign_in_as!(user)
-        visit root_path
       end
 
-      it { should_not have_link("Sign in") }
-      it { should_not have_link("Sign up") }
-      it { should have_link("Sign out") }
-      it { should have_link(survey_name) }
+      it { should have_content "Your county does not have any active surveys." }
+      it { should have_link("Sign in") }
+      it { should have_link("Sign up") }
       it { should_not have_link("New Survey") }
 
     end
@@ -48,11 +48,11 @@ describe "Survey pages" do
       describe "on survey show page" do
         before do
           sign_in_as!(user)
-          visit root_path
-          click_link survey_name
+          visit survey_path(survey)
         end
 
-        it { should_not have_link("Edit Survey") }
+        it { should_not have_selector('h2', text: survey_name) }
+        it { should_not have_content("Edit Survey") }
         it { should_not have_link("Delete Survey") }
       end
     end
@@ -77,7 +77,7 @@ describe "Survey pages" do
         describe "with valid data" do
           before do
             fill_in 'Name', with: 'Test Survey'
-            fill_in 'Description', with: 'Alameda County'
+            page.select county.name, from: 'County'
             click_button 'Create Survey'
           end
 
