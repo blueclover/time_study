@@ -3,9 +3,8 @@ class Survey < ActiveRecord::Base
   							 :create_with_logs, :default_start_date
 
   belongs_to :county
-  has_many :activity_logs, dependent: :destroy
-  has_many :log_entries, through: :activity_logs
-  has_many :activities, through: :log_entries
+  has_many :user_moments, dependent: :destroy
+  has_many :responses, through: :user_moments
 
   validates :name, presence: true
   validates :county_id, presence: true
@@ -27,6 +26,8 @@ class Survey < ActiveRecord::Base
   end
 
   private
+
+  
   	def create_logs
   		if create_with_logs
   			users = User.where(county_id: county_id)
