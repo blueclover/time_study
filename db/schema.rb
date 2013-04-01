@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327223744) do
+ActiveRecord::Schema.define(:version => 20130328202741) do
 
   create_table "activities", :force => true do |t|
     t.integer  "log_entry_id"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(:version => 20130327223744) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "county_id"
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
   add_index "surveys", ["county_id"], :name => "index_surveys_on_county_id"

@@ -5,7 +5,7 @@ describe "Survey pages" do
 
   survey_name = "Test Survey"
   let!(:survey) { create(:survey, name: survey_name) }
-  let!(:county)  { create(:county) }
+  let!(:county) { create(:county) }
   let(:user)    { create(:user) }  
   let(:admin)   { create(:admin) }  
 

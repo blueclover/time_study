@@ -1,6 +1,6 @@
 class Survey < ActiveRecord::Base
   attr_accessible :description, :name, :county_id,
-  							 :create_with_logs, :default_start_date
+  							 :start_date, :end_date
 
   belongs_to :county
   has_many :user_moments, dependent: :destroy
