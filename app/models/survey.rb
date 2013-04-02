@@ -1,6 +1,6 @@
 class Survey < ActiveRecord::Base
   attr_accessible :description, :name, :county_id,
-  							 :start_date, :end_date
+  							 :start_date, :end_date, :sample_size
 
   belongs_to :county
   has_many :user_moments, dependent: :destroy
@@ -9,43 +9,24 @@ class Survey < ActiveRecord::Base
   validates :name, presence: true
   validates :county_id, presence: true
 
-  attr_reader :create_with_logs, :default_start_date
-
-  def create_with_logs=(value)
-    @create_with_logs = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(value)
+  attr_reader :sample_size
+  
+  def sample_size=(value)
+    @sample_size = value.to_i
   end
 
-  def default_start_date=(value)
-    @default_start_date = value.to_date
-  end
-
-  after_create :create_logs
-
+  after_create :create_user_moments
+  
   def summary_table
-    activities.joins(:activity_category).sum(:hours, group: :activity_category)
+    
   end
 
   private
-
-  
-  	def create_logs
-  		if create_with_logs
-  			users = User.where(county_id: county_id)
-  			if date = default_start_date
-  				users.each do |user|
-  					log = self.activity_logs.build(start_date: date)
-  					log.user = user
-  					log.save!
-  					log.create_log_entries
-  				end
-  			else
-  				users.each do |user|
-  					log = self.activity_logs.build()
-  					log.user = user
-  					log.unconfirmed = true 
-  					log.save!
-  				end
-  			end
-  		end
-  	end
+  def create_user_moments
+    population = Population.new([1,2,3], start_date, end_date)
+    @sample_size.times do
+      user_moments.create!(user_id: population.random_user,
+                           moment: population.random_moment)
+    end
+  end
 end

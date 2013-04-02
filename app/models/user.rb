@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   belongs_to :county
   belongs_to :job_classification
   has_many :activity_logs, dependent: :destroy
+  has_many :user_moments, dependent: :restrict
 
   validates :county_id, presence: :true, unless: :admin
   validates :job_classification_id, presence: :true, unless: :admin

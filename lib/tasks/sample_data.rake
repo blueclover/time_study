@@ -7,8 +7,6 @@ namespace :db do
     populate_table('response_options')
     make_users
     make_surveys
-    make_activity_logs
-    make_log_entries
   end
 end
 
@@ -43,36 +41,10 @@ end
 def make_surveys
   counties = County.all(limit: 10)
   counties.each do |county|
-    county.surveys.create!(name: "#{county.name} Survey Feb 2013")
-  end
-end
-
-def make_activity_logs
-  surveys = Survey.all
-  date = Date.commercial(Date.today.year, Date.today.cweek - 1, 1)
-  surveys.each do |survey|
-    users = User.where(county_id: survey.county.id)
-    users.each_with_index do |user, n|
-      # date = Date.commercial(Date.today.year, n + 2, 1)
-      log = survey.activity_logs.build(start_date: date)
-      log.user = user
-      log.save!
-    end
-  end
-end
-
-def make_log_entries
-  activity_logs = ActivityLog.all
-  activity_logs.each do |log|
-    5.times do |n|
-      date = n.days.since(log.start_date).to_date
-      entry = log.log_entries.create!(date: date)
-      ActivityCategory.order(:code).each do |activity|
-        hours = rand(40)/4.0 - 6
-        hours = 0 if hours < 0
-        entry.activities.create!(activity_category: activity, hours: hours)
-      end
-    end
+    county.surveys.create!(name: "#{county.name} Survey Mar 2013",
+                           start_date: 30.days.ago,
+                           end_date: 0.days.ago,
+                           sample_size: 100)
   end
 end
 

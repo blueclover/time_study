@@ -6,13 +6,20 @@ class ApplicationController < ActionController::Base
       authenticate_user!
       unless current_user.admin?
         #flash[:alert] = "You must be an admin to do that."
-        log = current_user.activity_logs.first
-        if log
-          redirect_to [log.survey, log]
+        moment = current_user.user_moments.first
+        if moment
+          response = moment.response
+          if response
+            redirect_to [moment,response]
+          else
+            redirect_to new_user_moment_response_path(moment)
+          end
         else
           survey = Survey.find_by_county_id(current_user.county_id)
           if survey
-            redirect_to new_survey_activity_log_path(survey)
+            sign_out(current_user)
+            flash[:notice] = "You have not been selected to participate in any surveys."
+            redirect_to new_user_session_path
           else
             sign_out(current_user)
             flash[:notice] = "Your county does not have any active surveys."

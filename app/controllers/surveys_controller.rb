@@ -22,7 +22,7 @@ class SurveysController < ApplicationController
   end
 
   def show
-    @activity_logs = @survey.activity_logs.order(:id)
+    @user_moments = @survey.user_moments.order(:moment)
   end
 
   def edit

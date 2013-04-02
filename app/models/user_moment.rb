@@ -5,4 +5,8 @@ class UserMoment < ActiveRecord::Base
   has_one :response, dependent: :delete
 
   validates_presence_of [:user_id, :moment]
+
+  def user_responded?
+  	!response.nil?
+  end
 end

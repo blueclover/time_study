@@ -6,10 +6,9 @@
     <%= f.input :description %>
     <% if @survey.new_record? %>
       <%= f.association :county %>
-      <%= f.input :create_with_logs, label: "Create logs for all users?",
-      						as: :boolean %>
-      <%= f.input :default_start_date, as: :datepicker,
-      						hint: "Leave blank if you wish to specify start dates individually" %>
+      <%= f.input :start_date, as: :datepicker %>
+      <%= f.input :end_date, as: :datepicker %>
+      <%= f.input :sample_size %>
     <% end -%>
     <div class="form-actions">
       <%= f.submit nil, class: 'btn btn-primary' %>

@@ -1,10 +1,10 @@
 class Population
-	attr_reader :users, :start_date, :end_date, :holidays, 
+	attr_reader :participants, :start_date, :end_date, :holidays, 
 							:start_of_day, :end_of_day, :work_days
 
-	def initialize(users, start_date, end_date, holidays=[],
+	def initialize(participants, start_date, end_date, holidays=[],
 								 start_of_day=9, end_of_day=15)
-		@users = users
+		@participants = participants
 		@start_date = start_date
 		@end_date = end_date
 		@holidays = holidays
@@ -59,6 +59,6 @@ class Population
 	end
 
 	def random_user
-		users[rand(users.length)]
+		participants[rand(participants.length)]
 	end
 end
