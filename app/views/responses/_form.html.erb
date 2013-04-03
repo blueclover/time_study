@@ -7,13 +7,16 @@
       <%= f.input :q1selection, collection: @q1options,
                   label: "What type of activity?",
                   prompt: "Select activity type" %>
+      <%= f.input :q1text, label: "Please specify" %>
       <%= f.input :q2selection, collection: @q1options,
                   as: :grouped_select, group_method: :children,
                   label: "What specific activity?",
                   include_blank: true %>
+      <%= f.input :q2text, label: "Please specify" %>
       <%= f.input :q3selection, collection: @q3options,
                   label: "With whom?",
                   prompt: "Select people" %>
+      <%= f.input :q3text, label: "Please specify" %>
     <% end -%>
     <div class="form-actions">
       <%= f.submit "Submit", class: 'btn btn-primary' %>

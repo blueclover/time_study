@@ -11,10 +11,20 @@ class ResponsesController < ApplicationController
   end
 
   def create
+    fields = {q1selection: :q1text, q2selection: :q2text, q3selection: :q3text}
+    fields.each do |selection, text|
+      if params[:response][text].blank?
+        option = ResponseOption.find_by_id(params[:response][selection])
+        params[:response][text] = option.description
+      end
+    end
     @response = @user_moment.build_response(params[:response])
+    @response.activity_category_id = 
+          ResponseOption.find_by_id(@response.q2selection).activity_category_id
     if @response.save
+      sign_out(current_user)
       flash[:success] = "Thank you for your participation."
-      redirect_to @response
+      redirect_to new_user_session_path
     else
       flash[:error] = "Your response has not been saved."
       render :new
