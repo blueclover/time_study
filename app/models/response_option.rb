@@ -10,4 +10,8 @@ class ResponseOption < ActiveRecord::Base
 
   scope :for_question, 
   				->(question) { where("related_question = ?", "#{question}") }
+
+ 	def to_s
+    self.description
+  end
 end

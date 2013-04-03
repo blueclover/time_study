@@ -5,6 +5,9 @@ class ResponsesController < ApplicationController
 
   def new
     @response = @user_moment.build_response
+    @q1options = ResponseOption.for_question(1).all
+    @q2options = ResponseOption.for_question(2).all
+    @q3options = ResponseOption.for_question(3).all
   end
 
   def create
