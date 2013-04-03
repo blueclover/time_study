@@ -1,6 +1,7 @@
 class UserMoment < ActiveRecord::Base
   attr_accessible :user_id, :moment
 
+  belongs_to :survey
   belongs_to :user
   has_one :response, dependent: :delete
 

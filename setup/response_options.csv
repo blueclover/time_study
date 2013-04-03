@@ -57,5 +57,3 @@ id,related_question,description,parent_id,activity_category_id
 56,2,On paid leave or break or lunch,55,8
 57,2,Not scheduled to work,55,8
 58,2,on unpaid leave or break or lunch,55,8
-59,1,Other,59,
-60,2,Other,,

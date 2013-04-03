@@ -32,9 +32,6 @@ class ResponsesController < ApplicationController
   end
 
   def show
-    unless @user_moment.user_responded?
-      redirect_to '/'
-    end
   end
 
   def edit
@@ -50,7 +47,7 @@ class ResponsesController < ApplicationController
     def find_user_moment
       @user_moment = UserMoment.find(params[:user_moment_id])
     rescue ActiveRecord::RecordNotFound
-      flash[:alert] = "The survey you were looking" +
+      flash[:alert] = "The record you were looking" +
           " for could not be found."
       redirect_to surveys_path
     end

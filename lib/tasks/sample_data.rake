@@ -17,7 +17,7 @@ def make_users
                        password_confirmation: "password")
   admin.admin = true
   admin.save!
-  counties = County.all(limit: 2)
+  counties = County.all(limit: 5)
   jobs = JobClassification.all
   counties.each do |county|
     staff_count = 1
@@ -44,7 +44,7 @@ def make_surveys
     county.surveys.create!(name: "#{county.name} Survey Mar 2013",
                            start_date: 30.days.ago,
                            end_date: 0.days.ago,
-                           sample_size: 100)
+                           sample_size: 10)
   end
 end
 

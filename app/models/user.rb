@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   validates :county_id, presence: :true, unless: :admin
   validates :job_classification_id, presence: :true, unless: :admin
 
+  scope :participating, -> { where("admin = ?", false) }
+
   def timeout_in
     30.minutes
   end

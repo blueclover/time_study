@@ -23,10 +23,13 @@ class Survey < ActiveRecord::Base
 
   private
   def create_user_moments
-    population = Population.new([1,2,3], start_date, end_date)
-    @sample_size.times do
-      user_moments.create!(user_id: population.random_user,
-                           moment: population.random_moment)
+    users = county.users.participating.map(&:id)
+    unless users.empty?
+      population = Population.new(users, start_date, end_date)
+      @sample_size.times do
+        user_moments.create!(user_id: population.random_user,
+         moment: population.random_moment)
+      end
     end
   end
 end
