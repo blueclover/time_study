@@ -6,14 +6,9 @@ class ApplicationController < ActionController::Base
       authenticate_user!
       unless current_user.admin?
         #flash[:alert] = "You must be an admin to do that."
-        moment = current_user.user_moments.first
+        moment = current_user.first_active_moment
         if moment
-          response = moment.response
-          if response
-            redirect_to [moment,response]
-          else
-            redirect_to new_user_moment_response_path(moment)
-          end
+          redirect_to new_user_moment_response_path(moment)
         else
           survey = Survey.find_by_county_id(current_user.county_id)
           if survey

@@ -7,13 +7,15 @@ class UserMoment < ActiveRecord::Base
 
   validates_presence_of [:user_id, :moment]
 
-  scope :active, 
-  				-> { where("moment < ? AND moment > ?", Time.zone.now, 5.days.ago) }
+  scope :active, -> do
+  	where("moment < ? AND moment > ?", Time.zone.now, 5.days.ago)
+  end
 
-  scope :with_response, -> { joins(:response) }
+  scope :answered, -> { joins(:response) }
 
-  scope :with_no_response, ->
-  				{ where("id not in (SELECT DISTINCT user_moment_id FROM responses)") }
+  scope :unanswered, -> do
+  	where("id not in (SELECT DISTINCT user_moment_id FROM responses)")
+  end
 
   def user_responded?
   	!response.nil?

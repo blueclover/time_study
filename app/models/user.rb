@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     self.job_classification.name if job_classification
   end
 
+  def first_active_moment
+    user_moments.active.unanswered.order(:moment).first
+  end
+
   def role
     self.admin? ? "Admin" : "User"
   end
