@@ -1,7 +1,7 @@
 <%= simple_form_for [@user_moment, @response],
           html: { class: 'form-horizontal'} do |f| %>
   <fieldset>
-    <legend><%= controller.action_name.capitalize %> Response</legend>
+    <legend><%= controller.action_name.capitalize %> Response for moment: <%= @user_moment.moment.strftime('%b %e, %l:%M %p') %></legend>
 
     <% if @response.new_record? %>
       <%= f.input :q1selection, collection: @q1options,
