@@ -1,13 +1,12 @@
-<div class='span9'>
+<div class='span4'>
 	<h3>Summary Table</h3>
-	<div class="span8">
+	<div class="span3">
 		<table class="table">
 			<tbody>
 				<% @table.each do |row| %>
 					<tr>
-						<td><%= row[0].code %></td>
-						<td><%= row[0].name %></td>
-						<td><%= row[1] || 0 %></td>
+						<td><%= row[0] %>
+						<td><%= (row[1] * 100).round(2) %>%</td>
 					</tr>
 				<% end -%>
 			</tbody>

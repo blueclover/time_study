@@ -29,7 +29,7 @@
 			    	<td><%= moment.moment.strftime('%b %e, %l:%M %p') %></td>
 			    	<td>
 			    		<% if moment.user_responded? %>
-				    		<%= link_to "view", [@survey, moment], 
+				    		<%= link_to "view", [moment, moment.response], 
 				    								class: 'btn btn-mini' %>
 				    	<% end -%>
 			    	</td>		

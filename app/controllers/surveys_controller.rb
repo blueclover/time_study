@@ -46,7 +46,7 @@ class SurveysController < ApplicationController
   end
 
   def summary_table
-    @table = @survey.summary_table.sort_by { |x| x[0][:code] }
+    @table = @survey.summary_table.sort
   end
 
   private

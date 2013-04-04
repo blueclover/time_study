@@ -1,4 +1,9 @@
 <% title("Response") %>
 <div class='span10'>
-
+	<div class="well">
+		<p>1) <%= @response.q1text %></p>
+		<p>2) <%= @response.q2text %></p>
+		<p>3) <%= @response.q3text %></p>
+		<p>Code: <%= @response.activity_category.code %></p>
+	</div>
 </div>
