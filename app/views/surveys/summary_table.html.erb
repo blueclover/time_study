@@ -1,12 +1,18 @@
-<div class='span4'>
+<div class='span3'>
 	<h3>Summary Table</h3>
-	<div class="span3">
+	<div class="span2">
 		<table class="table">
 			<tbody>
+				<thead>
+					<tr>
+						<th>Code</th>
+						<th style="text-align:right;">Percentage</th>
+					</tr>
+				</thead>
 				<% @table.each do |row| %>
 					<tr>
-						<td><%= row[0] %>
-						<td><%= (row[1] * 100).round(2) %>%</td>
+						<td><%= row[0] %></td>
+						<td style="text-align:right;"><%= (row[1] * 100).round(2) %>%</td>
 					</tr>
 				<% end -%>
 			</tbody>
