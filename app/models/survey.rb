@@ -17,6 +17,10 @@ class Survey < ActiveRecord::Base
   end
 
   after_create :create_user_moments
+
+  def participants
+    county.users.participating
+  end
   
   def summary_table
     codes = ActivityCategory.order(:code).map(&:code)

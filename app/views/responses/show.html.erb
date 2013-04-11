@@ -1,5 +1,6 @@
 <% title("Response") %>
 <div class='span10'>
+	<h4>Response to moment: <%= @user_moment.moment.strftime('%b %e, %l:%M %p') %> by <%= @user_moment.user %></h4>
 	<div class="well">
 		<p>1) <%= @response.q1text %></p>
 		<p>2) <%= @response.q2text %></p>

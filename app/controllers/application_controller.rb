@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
           survey = Survey.find_by_county_id(current_user.county_id)
           if survey
             sign_out(current_user)
-            flash[:notice] = "You have not been selected to participate in any surveys."
+            flash[:notice] = "You do not have any active moments to respond to."
             redirect_to new_user_session_path
           else
             sign_out(current_user)

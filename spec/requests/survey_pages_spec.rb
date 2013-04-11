@@ -13,8 +13,8 @@ describe "Survey pages" do
     context "anonymous users" do
       before { visit root_path }
 
-      it { should have_link("Sign in") }
-      it { should have_link("Sign up") }
+      it { should have_button("Sign in") }
+      it { should_not have_link("Sign up") }
       it { should_not have_link(survey_name) }
       it { should_not have_link("New Survey") }
 
@@ -26,8 +26,7 @@ describe "Survey pages" do
       end
 
       it { should have_content "Your county does not have any active surveys." }
-      it { should have_link("Sign in") }
-      it { should have_link("Sign up") }
+      it { should have_button("Sign in") }
       it { should_not have_link("New Survey") }
 
     end

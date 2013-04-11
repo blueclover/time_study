@@ -1,9 +1,21 @@
 name,code,weight
 Medi-Cal Outreach A,A,
-Medi-Cal Outreach B1,B1,0.75
-Medi-Cal Outreach B2,B2,0.5
-Facilitating Medi-Cal Application,C,
-"Medi-Cal Non-Emergency, Non-Medical Transportation",D,
-Contracting for Medi-Cal Services,E,
-Program Planning and Policy Development,F,
-MAA/TCM Coordination and Claims Administration,G,
+Medi-Cal Outreach B1,B1,0.8
+Medi-Cal Outreach B2,B2,0.75
+"Probation-Related, Law Enforcement, and Other Activities",1,
+Direct Medical Services,2,
+Non-Medi-Cal Outreach ,3,
+Initial Medi-Cal Outreach,4,
+Facilitating Application for non-Medi-Cal Programs,5,
+Facilitating Medi-Cal Application,6,
+"Referral, Coordination, and Monitoring of non-Medi-Cal Services",7,
+"Ongoing Referral, Coordination, and Monitoring of Medi-Cal Services",8,
+Transportation for non-Medi-Cal Services,9,
+Arranging Transportation in Support of Medi-Cal Services,10,
+Non-Medi-Cal Translation,11,
+Translation Related to Medi-Cal Services,12,
+"Program Planning, Policy Development, and Interagency Coordination Related to non-Medi-Cal Services",13,
+"Program Planning, Policy Development, and Interagency Coordination Related to Medi-Cal Services",14,
+MAA/TCM Claims Administration Coordination and Training,15,
+General Administration/Paid Time Off,16,
+Unpaid Time Off,,
