@@ -1,0 +1,25 @@
+<div class="user-moments">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>User</th>
+				<th>Moment</th>
+				<th>Response</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @user_moments.each do |moment| %>
+			<tr>
+				<td><%= moment.user %></td>
+				<td><%= moment.moment.strftime('%b %e, %l:%M %p') %></td>
+				<td>
+					<% if moment.user_responded? %>
+					<%= link_to "view", [moment, moment.response], 
+					class: 'btn btn-mini' %>
+					<% end -%>
+				</td>		
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

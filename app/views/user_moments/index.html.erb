@@ -1,0 +1,27 @@
+<h3>Active moments for <%= current_user %></h3>
+<div class="well span5">
+	<table class="table" id="moments">
+		<thead>
+			<tr>
+				<th>Moment</th>
+				<th>Response</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @user_moments.each do |moment| %>
+			<tr>
+				<td><%= moment.moment.strftime('%b %e, %l:%M %p') %></td>
+				<td>
+					<% if moment.user_responded? %>
+						<%= link_to "edit response", [:edit, moment, moment.response], 
+						class: 'btn btn-mini' %>
+					<% else %>
+						<%= link_to "respond now", new_user_moment_response_path(moment), 
+						class: 'btn btn-primary btn-mini' %>
+					<% end -%>
+				</td>		
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

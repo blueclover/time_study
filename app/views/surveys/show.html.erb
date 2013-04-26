@@ -2,7 +2,8 @@
 <div class='span10'>
 	<h2><%= @survey.name %></h2>	
 	<p>
-		<%= link_to "View Summary", summary_table_survey_path(@survey), class: "btn" %>
+		<%= link_to "View Summary", summary_table_survey_path(@survey), 
+								class: "btn" %>
 		<%= link_to "Edit Survey", [:edit, @survey], 
 								class: 'btn' %>
 		<%= link_to "Delete Survey", @survey,
@@ -12,30 +13,7 @@
 	<div class="well" id="user-moments">
 		<h3>User Moments</h3>
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>User</th>
-					<th>Moment</th>
-					<th>Response</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% @user_moments.each do |moment| %>
-			    <tr>
-			    	<td><%= moment.id %></td>
-			    	<td><%= moment.user %></td>
-			    	<td><%= moment.moment.strftime('%b %e, %l:%M %p') %></td>
-			    	<td>
-			    		<% if moment.user_responded? %>
-				    		<%= link_to "view", [moment, moment.response], 
-				    								class: 'btn btn-mini' %>
-				    	<% end -%>
-			    	</td>		
-					</tr>
-				<% end %>
-			</tbody>
-		</table>
+		<%= render 'user_moments' %>
+
 	</div>
 </div>
