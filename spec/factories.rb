@@ -27,4 +27,22 @@ FactoryGirl.define do
   factory :job_classification do
     sequence(:name) { |n| "Job #{n}" }
   end
+
+  factory :activity_category do
+    sequence(:name) { |n| "Activity #{n}" }
+  end
+
+  factory :response_option do
+    factory :q1option do
+      related_question 1
+    end
+    factory :q2option do
+      related_question 2
+      activity_category
+    end
+    factory :q3option do
+      related_question 3
+      sequence(:description) { |n| "People #{n}" }
+    end
+  end
 end

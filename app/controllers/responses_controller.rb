@@ -22,14 +22,8 @@ class ResponsesController < ApplicationController
     @response.activity_category_id = 
           ResponseOption.find_by_id(@response.q2selection).activity_category_id
     if @response.save
-      next_moment = current_user.first_active_moment
       flash[:success] = "Thank you for your participation."
-      if next_moment
-        redirect_to new_user_moment_response_path(next_moment)
-      else
-        sign_out(current_user)
-        redirect_to new_user_session_path
-      end
+      redirect_to user_moments_path
     else
       flash[:error] = "Your response has not been saved."
       render :new
