@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328202741) do
+ActiveRecord::Schema.define(:version => 20130218192711) do
+
+  create_table "activities", :force => true do |t|
+    t.integer  "log_entry_id"
+    t.integer  "activity_category_id"
+    t.float    "hours"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "activities", ["activity_category_id"], :name => "index_activities_on_activity_category_id"
+  add_index "activities", ["log_entry_id"], :name => "index_activities_on_log_entry_id"
 
   create_table "activity_categories", :force => true do |t|
     t.string   "name"
@@ -21,8 +32,19 @@ ActiveRecord::Schema.define(:version => 20130328202741) do
     t.datetime "updated_at",                  :null => false
   end
 
+  create_table "activity_logs", :force => true do |t|
+    t.date     "start_date"
+    t.integer  "user_id"
+    t.integer  "survey_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "unconfirmed", :default => false
+  end
+
+  add_index "activity_logs", ["survey_id"], :name => "index_activity_logs_on_survey_id"
+
   create_table "counties", :force => true do |t|
-    t.string "name", :null => false
+    t.string "name"
   end
 
   add_index "counties", ["name"], :name => "index_counties_on_name", :unique => true
@@ -31,32 +53,14 @@ ActiveRecord::Schema.define(:version => 20130328202741) do
     t.string "name"
   end
 
-  create_table "response_options", :force => true do |t|
-    t.string   "description"
-    t.integer  "related_question"
-    t.integer  "parent_id"
-    t.integer  "activity_category_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+  create_table "log_entries", :force => true do |t|
+    t.date     "date"
+    t.integer  "activity_log_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
-  add_index "response_options", ["activity_category_id"], :name => "index_response_options_on_activity_category_id"
-
-  create_table "responses", :force => true do |t|
-    t.integer  "user_moment_id"
-    t.integer  "activity_category_id"
-    t.integer  "q1selection"
-    t.integer  "q2selection"
-    t.integer  "q3selection"
-    t.string   "q1text"
-    t.string   "q2text"
-    t.string   "q3text"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-  end
-
-  add_index "responses", ["activity_category_id"], :name => "index_responses_on_activity_category_id"
-  add_index "responses", ["user_moment_id"], :name => "index_responses_on_user_moment_id"
+  add_index "log_entries", ["activity_log_id"], :name => "index_log_entries_on_activity_log_id"
 
   create_table "surveys", :force => true do |t|
     t.string   "name"
@@ -64,22 +68,9 @@ ActiveRecord::Schema.define(:version => 20130328202741) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "county_id"
-    t.date     "start_date"
-    t.date     "end_date"
   end
 
   add_index "surveys", ["county_id"], :name => "index_surveys_on_county_id"
-
-  create_table "user_moments", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "moment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "survey_id"
-  end
-
-  add_index "user_moments", ["survey_id"], :name => "index_user_moments_on_survey_id"
-  add_index "user_moments", ["user_id"], :name => "index_user_moments_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false

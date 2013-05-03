@@ -9,15 +9,15 @@ TimeStudy::Application.routes.draw do
       get :summary_table
     end
 
-    resources :user_moments
+    resources :activity_logs
   end
 
-  resources :user_moments do
+  resources :activity_logs do
     member do
       get :summary_table
     end
   
-    resources :responses
+    resources :log_entries
   end
 
   namespace :admin do

@@ -2,18 +2,48 @@
 <div class='span10'>
 	<h2><%= @survey.name %></h2>	
 	<p>
-		<%= link_to "View Summary", summary_table_survey_path(@survey), 
-								class: "btn" %>
+		<%= link_to "View Summary", summary_table_survey_path(@survey), class: "btn" %>
 		<%= link_to "Edit Survey", [:edit, @survey], 
 								class: 'btn' %>
 		<%= link_to "Delete Survey", @survey,
 		            method: :delete, confirm: "Are you sure?", 
 								class: 'btn btn-danger' %>
 	</p>
-	<div class="well" id="user-moments">
-		<h3>User Moments</h3>
+	<div class="well" id="activity-logs">
+		<h3>Activity Logs</h3>
 
-		<%= render 'user_moments' %>
-
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>User</th>
+					<th>Start Date</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @activity_logs.each do |log| %>
+			    <tr>
+			    	<td><%= log.id %></td>
+			    	<td><%= link_to log.user.email, [@survey, log] %></td>
+			    	<td><%= log.start_date %></td>
+			    	<td>
+			    		<% unless log.unconfirmed %>
+				    		<%= link_to "view", [@survey, log], 
+				    								class: 'btn btn-mini' %>
+				    	<% end -%>
+			    		<%= link_to "Edit", [:edit, @survey, log], 
+			    								class: 'btn btn-mini' %>
+							<%= link_to "Delete", [@survey, log],
+							            method: :delete, confirm: "Are you sure?", 
+			    								class: 'btn btn-mini btn-danger' %>
+			    	</td>		
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+			
+		<%= link_to "New Activity Log", new_survey_activity_log_path(@survey),
+								class: 'btn btn-primary' %>
 	</div>
 </div>

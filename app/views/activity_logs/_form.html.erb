@@ -1,0 +1,15 @@
+<%= simple_form_for [@survey, @activity_log] do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Activity Log</legend>
+
+    <%= f.input :start_date, as: :datepicker %>
+    <% if @activity_log.new_record? && current_user.admin %>
+	    <%= f.input :user_id, collection: @users %>
+	  <% end -%>
+
+    <div class="form-actions">
+      <%= f.submit nil, class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', @survey, class: 'btn' %>
+    </div>
+  </fieldset>
+<% end %>

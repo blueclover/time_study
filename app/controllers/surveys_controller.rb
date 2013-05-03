@@ -3,7 +3,7 @@ class SurveysController < ApplicationController
   before_filter :find_survey, except: [:index, :new, :create]
 
   def index
-    @surveys = Survey.order('created_at desc')
+    @surveys = Survey.order(:id)
   end
 
   def new
@@ -22,7 +22,7 @@ class SurveysController < ApplicationController
   end
 
   def show
-    @user_moments = @survey.user_moments.order(:moment)
+    @activity_logs = @survey.activity_logs.order(:id)
   end
 
   def edit
@@ -46,7 +46,7 @@ class SurveysController < ApplicationController
   end
 
   def summary_table
-    @table = @survey.summary_table.sort
+    @table = @survey.summary_table.sort_by { |x| x[0][:code] }
   end
 
   private

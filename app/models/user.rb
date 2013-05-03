@@ -15,13 +15,10 @@ class User < ActiveRecord::Base
 
   belongs_to :county
   belongs_to :job_classification
-  has_many :user_moments, dependent: :restrict
-  has_many :responses, through: :user_moments
+  has_many :activity_logs, dependent: :destroy
 
   validates :county_id, presence: :true, unless: :admin
   validates :job_classification_id, presence: :true, unless: :admin
-
-  scope :participating, -> { where("admin = ?", false) }
 
   def timeout_in
     30.minutes
@@ -33,10 +30,6 @@ class User < ActiveRecord::Base
 
   def job_title
     self.job_classification.name if job_classification
-  end
-
-  def first_active_moment
-    user_moments.active.unanswered.order(:moment).first
   end
 
   def role
