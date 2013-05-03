@@ -3,7 +3,7 @@
   <fieldset>
     <legend><%= controller.action_name.capitalize %> response for moment: <%= @user_moment.moment.strftime('%b %e, %l:%M %p') %></legend>
 
-    <% if @response.new_record? %>
+    <%# if @response.new_record? %>
       <%= f.input :q1selection, collection: @q1options,
                   label: "What type of activity?",
                   prompt: "Select activity type" %>
@@ -17,7 +17,7 @@
                   label: "With whom?",
                   prompt: "Select people" %>
       <%#= f.input :q3text, label: "Please specify" %>
-    <% end -%>
+    <%# end -%>
     <div class="form-actions">
       <%= f.submit "Submit", class: 'btn btn-primary' %>
       <%= link_to 'Cancel', :back, class: 'btn' %>

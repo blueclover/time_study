@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   belongs_to :county
   belongs_to :job_classification
   has_many :user_moments, dependent: :restrict
+  has_many :responses, through: :user_moments
 
   validates :county_id, presence: :true, unless: :admin
   validates :job_classification_id, presence: :true, unless: :admin

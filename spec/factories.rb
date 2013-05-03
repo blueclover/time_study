@@ -34,9 +34,11 @@ FactoryGirl.define do
 
   factory :response_option do
     factory :q1option do
+      sequence(:description) { |n| "Activity type #{n}" }
       related_question 1
     end
     factory :q2option do
+      sequence(:description) { |n| "Activity #{n}" }
       related_question 2
       activity_category
     end
@@ -44,5 +46,19 @@ FactoryGirl.define do
       related_question 3
       sequence(:description) { |n| "People #{n}" }
     end
+  end
+
+  factory :user_moment do
+    moment 1.day.ago
+  end
+
+  factory :response do
+    q1selection 1
+    q2selection 2
+    q3selection 3
+    q1text 'text'
+    q2text 'text'
+    q3text 'text'
+    activity_category
   end
 end
