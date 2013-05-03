@@ -6,10 +6,11 @@ class ApplicationController < ActionController::Base
     authenticate_user!
     unless current_user.admin?
       moments = current_user.user_moments.active.count
-      if moments == 1
-        moment = current_user.first_active_moment
-        redirect_to new_user_moment_response_path(moment)
-      elsif moments > 1
+      # if moments == 1
+      #   moment = current_user.first_active_moment
+      #   redirect_to new_user_moment_response_path(moment)
+      # elsif moments > 1
+      if moments >= 1
         redirect_to user_moments_path
       else
         survey = Survey.find_by_county_id(current_user.county_id)
