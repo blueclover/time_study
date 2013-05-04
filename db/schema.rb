@@ -42,9 +42,10 @@ ActiveRecord::Schema.define(:version => 20130218192711) do
   end
 
   add_index "activity_logs", ["survey_id"], :name => "index_activity_logs_on_survey_id"
+  add_index "activity_logs", ["user_id"], :name => "index_activity_logs_on_user_id"
 
   create_table "counties", :force => true do |t|
-    t.string "name"
+    t.string "name", :null => false
   end
 
   add_index "counties", ["name"], :name => "index_counties_on_name", :unique => true
