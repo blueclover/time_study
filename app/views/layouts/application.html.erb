@@ -17,7 +17,11 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand" href="/">Medi-Cal Time Study</a>
+        <% if mobile_device? %>
+          <span class="brand">MAA Hours</span>
+        <% else %>
+          <a class="brand" href="/">Medi-Cal Time Study</a>
+        <% end -%>
         <ul class="nav">
           <% if user_signed_in? %>
             <% if !mobile_device? && current_user.admin? %>
