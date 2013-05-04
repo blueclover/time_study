@@ -6,7 +6,12 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% if mobile_device? %>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+  <% else %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% end -%>
 </head>
 <body>
   <div class="navbar navbar-fixed-top">
