@@ -53,12 +53,14 @@
     </div>
     <%#= ENV['RACK_ENV'] %>
   </div>
-  <footer>
-    <div class="container">
-      <p class="muted credit">
-        &copy;<%=Date.current.year%> Community Oriented Correctional Health Services
-      </p>
-    </div>
-  </footer>
+  <% unless mobile_device? %>
+    <footer>
+      <div class="container">
+        <p class="muted credit">
+          &copy;<%=Date.current.year%> Community Oriented Correctional Health Services
+        </p>
+      </div>
+    </footer>
+  <% end -%>
 </body>
 </html>
