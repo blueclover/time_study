@@ -15,7 +15,7 @@
         <a class="brand" href="/">Medi-Cal Time Study</a>
         <ul class="nav">
           <% if user_signed_in? %>
-            <% if current_user.admin? %>
+            <% if !mobile_device? && current_user.admin? %>
               <li id="fat-menu" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   Admin <b class="caret"></b>
