@@ -17,9 +17,9 @@ class ApplicationController < ActionController::Base
     authenticate_user!
     unless current_user.admin?
       #flash[:alert] = "You must be an admin to do that."
-      log = current_user.activity_logs.first
-      if log
-        redirect_to [log.survey, log]
+      log_entry = current_user.log_entries.last
+      if log_entry
+        redirect_to [:edit, log_entry.activity_log, log_entry]
       else
         survey = Survey.find_by_county_id(current_user.county_id)
         if survey

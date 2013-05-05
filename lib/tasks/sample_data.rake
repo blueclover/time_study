@@ -12,12 +12,19 @@ namespace :db do
 end
 
 def make_users
+  password  = "password"
   admin = User.new(#name:     "Example User",
                        email:    "admin@county.org",
-                       password: "password",
-                       password_confirmation: "password")
+                       password: password,
+                       password_confirmation: password)
   admin.admin = true
   admin.save!
+
+  County.first.users.create(email: "user@alameda.org",
+                            password: password,
+                            password_confirmation: password,
+                            job_classification_id: 1)
+
   counties = County.all(limit: 2)
   jobs = JobClassification.all
   counties.each do |county|
@@ -26,7 +33,7 @@ def make_users
       staff_count.times do |n|
         #name  = Faker::Name.name
         email = "#{job.name.parameterize}_#{n+1}@#{county.name.parameterize}.org"
-        password  = "password"
+        
         user = county.users.build(#name:     name,
                                   email:    email,
                                   password: password,
@@ -48,7 +55,7 @@ end
 
 def make_activity_logs
   surveys = Survey.all
-  date = Date.commercial(Date.today.year, Date.today.cweek - 1, 1)
+  date = Date.commercial(Date.today.year, Date.today.cweek, 1)
   surveys.each do |survey|
     users = User.where(county_id: survey.county.id)
     users.each_with_index do |user, n|
