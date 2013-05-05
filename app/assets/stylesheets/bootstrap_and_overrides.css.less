@@ -42,9 +42,14 @@ body { padding-top: 60px; }
 }
 
 .navbar {
+	margin-bottom: -1px;
 	.nav {
 	 float: right;
 	}
+}
+
+.navbar-inner {
+	padding: 0px;
 }
 
 footer {
@@ -60,19 +65,32 @@ footer {
 	border-top: none;
 }
 
-.mobile-activities {
-	.btn {
-		font-size: 1.8em;
-	}
-	select {
-		width: 100px;
-		height: 45px;
-		font-size: 1.5em;
-	}
+.mobile-activities-select {
 	font-size: 1.3em;
 	overflow: hidden;
 	white-space: nowrap;
 	-webkit-user-select: none;
+	select {
+		width: 80px;
+		height: 40px;
+		font-size: 1.2em;
+	}
+	.form-buttons {
+		padding-left: 10px;
+	}
+	.table td {
+		padding: 8px 8px 0px 8px;
+	}
+}
+
+.mobile-activities {
+	font-size: 1.3em;
+	overflow: hidden;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	.btn {
+		font-size: 1.8em;
+	}
 }
 
 .fake {

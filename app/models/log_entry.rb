@@ -10,4 +10,8 @@ class LogEntry < ActiveRecord::Base
 
   validates :signed, acceptance: true
 
+  def total_hours
+  	activities.sum(:hours)
+  end
+
 end

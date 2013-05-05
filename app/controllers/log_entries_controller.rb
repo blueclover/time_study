@@ -14,6 +14,7 @@ class LogEntriesController < ApplicationController
   end
 
   def update
+    
     if @log_entry.update_attributes(params[:log_entry])
       flash[:success] = "Log entry has been updated."
       redirect_to [@activity_log, @log_entry]

@@ -1,12 +1,12 @@
-<h4><%= @log_entry.date.strftime('%B %e, %Y') %></h4>
+<% provide(:header, @log_entry.date.strftime('%B %e, %Y')) %>
 <%= simple_form_for([@log_entry.activity_log, @log_entry]) do |f| %>
 	<%= f.error_notification %>
-	<div class="mobile-activities">
+	<div class="mobile-activities-select">
 		<table class="table" id="activities">
 			<tbody>
 				<%= f.fields_for :activities, @activities do |a| %>
 					<tr>
-						<td>Code <%= a.object.code %></td>
+						<td><%= a.object.name %></td>
 						<td><%= a.input :hours, collection: @hour_options,
 														label: false,
 														include_blank: false %></td>
@@ -14,7 +14,10 @@
 				<% end -%>
 			</tbody>
 		</table>
+		<div class="form-buttons">
+			<%= f.submit "Done", class: 'btn btn-large btn-primary' %>
+		</div>
 	</div>
-  <%= f.submit "Done", class: 'btn btn-large btn-primary' %>
 <% end -%>
+
 

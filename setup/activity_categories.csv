@@ -1,9 +1,5 @@
 name,code,weight
-Medi-Cal Outreach A,A,
-Medi-Cal Outreach B1,B1,0.75
-Medi-Cal Outreach B2,B2,0.5
-Facilitating Medi-Cal Application,C,
-"Medi-Cal Non-Emergency, Non-Medical Transportation",D,
-Contracting for Medi-Cal Services,E,
-Program Planning and Policy Development,F,
-MAA/TCM Coordination and Claims Administration,G,
+Outreach A,A,
+Outreach B1,B1,0.75
+Facilitating Application,C,
+Transportation,D,

@@ -13,12 +13,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <% end -%>
 </head>
-<body>
-  <div class="navbar navbar-fixed-top">
+<% if mobile_device? %>
+  <body style="padding: 0px;">
+    <div class="navbar">
+<% else %>
+  <body>
+    <div class="navbar navbar-fixed-top">
+<% end -%>
     <div class="navbar-inner">
       <div class="container">
         <% if mobile_device? %>
-          <span class="brand">MAA Hours</span>
+          <span class="brand">
+            <% if content_for?(:header) %>
+              <%= yield(:header) %>
+            <% else %>
+              MAA Time Survey
+            <% end %>
+          </span>
         <% else %>
           <a class="brand" href="/">Medi-Cal Time Study</a>
         <% end -%>

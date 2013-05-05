@@ -1,7 +1,11 @@
 <title>
-  <% if content_for?(:title) %>
-    <%= yield(:title) %>
-  <% else %>
-    Time Study
+	<% if mobile_device? %>
+		MAA Log
+	<% else %>
+	  <% if content_for?(:title) %>
+	    <%= yield(:title) %>
+	  <% else %>
+	    Time Study
+	  <% end %>
   <% end %>
 </title>
