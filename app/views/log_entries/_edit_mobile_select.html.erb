@@ -1,0 +1,19 @@
+<%= simple_form_for([@log_entry.activity_log, @log_entry]) do |f| %>
+	<%= f.error_notification %>
+	<div class="mobile-activities">
+		<table class="table" id="activities">
+			<tbody>
+				<%= f.fields_for :activities, @activities do |a| %>
+					<tr>
+						<td>Code <%= a.object.code %></td>
+						<td><%= a.input :hours, collection: @hour_options,
+														label: false,
+														include_blank: false %></td>
+					</tr>
+				<% end -%>
+			</tbody>
+		</table>
+	</div>
+  <%= f.submit "Done", class: 'btn btn-large btn-primary' %>
+<% end -%>
+
