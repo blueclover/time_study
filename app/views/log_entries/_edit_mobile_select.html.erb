@@ -1,3 +1,4 @@
+<h4><%= @log_entry.date.strftime('%B %e, %Y') %></h4>
 <%= simple_form_for([@log_entry.activity_log, @log_entry]) do |f| %>
 	<%= f.error_notification %>
 	<div class="mobile-activities">
