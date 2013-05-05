@@ -1,5 +1,9 @@
 <% if mobile_device? %>
-	<%= render "edit_mobile" %>
+	<% if false %>
+		<%= render "edit_mobile" %>
+	<% else %>
+		<%= render "edit_mobile_select" %>
+	<% end -%>
 <% else %>
 	<%= render "edit_full" %>
 <% end -%>
