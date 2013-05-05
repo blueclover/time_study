@@ -1,21 +1,20 @@
 <% title("Activity Log") %>
 <div class='span10'>
-	<h3>Activity Log Starting 
-		<%= @activity_log.start_date.strftime('%B %e, %Y') %></h3>
+	<h3>Activity Log History</h3>
 </div>
 <div class='span5'>
 	<div class="span4" id="log-entries">
 		<table class="table">
 			<tbody>
-				<% @activity_log.log_entries.order(:date).each_with_index do |entry, i| %>
+				<% @activity_log.log_entries.order('date desc').each_with_index do |entry, i| %>
 					<% today = entry.date == Date.today %>
 					<tr <%= "class=highlight" if today %>>
 						<td>
-							<%= link_to "Day #{i + 1}", 
+							<%= link_to entry.date.strftime('%A, %b %e'), 
 											today ? [:edit, @activity_log, entry] : [@activity_log, entry] 
 								%>
 						</td>
-						<td><%= entry.date.strftime('%A, %b %e') %></td>
+						<td><%= entry.total_hours %></td>
 					</tr>
 				<% end %>
 			</tbody>
