@@ -1,0 +1,24 @@
+<% provide(:header, @log_entry.date.strftime('%A, %b %e')) %>
+<div class='span8'>
+	<div class="span8" id="activities">
+		<table class="table">
+			<tbody>
+				<% @activities.each do |activity| %>
+					<tr>
+						<td><%= activity.name %></td>
+						<td class="number"><%= activity.hours || 0 %></td>
+					</tr>
+				<% end -%>
+				<tr>
+					<td>Other</td>
+					<td class="number"><%= 8 - @log_entry.total_hours || 0 %></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="form-actions">
+		<%= link_to "Edit", [:edit, @activity_log, @log_entry], 
+								class: 'btn' if @log_entry.date < Date.tomorrow %>
+		<%= link_to "View History", [@activity_log.survey, @activity_log], class: "btn" %>
+	</div>
+</div>

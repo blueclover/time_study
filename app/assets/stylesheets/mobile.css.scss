@@ -1,0 +1,50 @@
+.container { font-size: 1.2em; }
+
+.navbar {
+	margin-bottom: -1px;
+}
+
+.navbar-inner {
+	padding: 0px 0px 0px 10px;
+}
+
+.alert {
+	margin-top: 8px;
+}
+
+.form-actions {
+	padding: 0px 20px;
+}
+
+.mobile-activities-select {
+	
+	overflow: hidden;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	select {
+		width: 80px;
+		height: 36px;
+		font-size: 1.2em;
+	}
+	.table td {
+		padding: 8px 8px 0px 8px;
+	}
+}
+
+.mobile-activities {
+	font-size: 1.3em;
+	overflow: hidden;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	.btn {
+		font-size: 1.8em;
+	}
+}
+
+.fake {
+	display: inline-block;
+	width: 50px;
+	text-align: right;
+	padding: 0px 5px;
+	font-size: 1.5em;
+}

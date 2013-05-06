@@ -1,4 +1,4 @@
-<% provide(:header, @log_entry.date.strftime('%B %e, %Y')) %>
+<% provide(:header, @log_entry.date.strftime('%A, %b %e')) %>
 <%= simple_form_for([@log_entry.activity_log, @log_entry]) do |f| %>
 	<%= f.error_notification %>
 	<div class="mobile-activities-select">
@@ -14,7 +14,7 @@
 				<% end -%>
 			</tbody>
 		</table>
-		<div class="form-buttons">
+		<div class="form-actions">
 			<%= f.submit "Save", class: 'btn btn-large btn-primary' %>
 		</div>
 	</div>

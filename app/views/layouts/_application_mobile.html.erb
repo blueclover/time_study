@@ -1,0 +1,33 @@
+<body style="padding: 0px;">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <span class="brand">
+        <% if content_for?(:header) %>
+          <%= yield(:header) %>
+        <% else %>
+          MAA Time Survey
+        <% end %>
+      </span>
+      <ul class="nav">
+        <% if user_signed_in? %>
+          <li><%= link_to "Sign out", destroy_user_session_path,
+                          :method => :delete %></li>
+        <% end %>  
+      </ul>
+    </div>
+  </div>
+  <div class="container">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key -%>">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <%= value %>
+      </div>
+    <% end %>
+
+    <div class='row'>
+      <%= yield %>
+    </div>
+    <%#= ENV['RACK_ENV'] %>
+  </div>
+</body>
+</html>

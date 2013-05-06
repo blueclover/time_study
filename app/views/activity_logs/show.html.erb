@@ -1,33 +1,5 @@
-<% title("Activity Log") %>
-<div class='span10'>
-	<h3>Activity Log History</h3>
-</div>
-<div class='span5'>
-	<div class="span4" id="log-entries">
-		<table class="table">
-			<tbody>
-				<% @activity_log.log_entries.order('date desc').each_with_index do |entry, i| %>
-					<% today = entry.date == Date.today %>
-					<tr <%= "class=highlight" if today %>>
-						<td>
-							<%= link_to entry.date.strftime('%A, %b %e'), 
-											today ? [:edit, @activity_log, entry] : [@activity_log, entry] 
-								%>
-						</td>
-						<td><%= entry.total_hours %></td>
-					</tr>
-				<% end %>
-			</tbody>
-		</table>
-	</div>
-	<% if current_user.admin %>
-			<p>
-				<%= link_to "Back to Survey", @survey, class: "btn" %>
-				<% if @activity_log.start_date < 5.days.ago.to_date %>
-					<%= link_to "View Summary", 
-											summary_table_activity_log_path(@activity_log),
-										class: "btn" %>
-				<% end -%>
-			</p>
-	<% end -%>
-</div>
+<% if mobile_device? %>
+	<%= render "show_mobile" %>
+<% else %>
+	<%= render "show_full" %>
+<% end -%>
