@@ -17,16 +17,15 @@
     </div>
   </div>
   <div class="container">
+    <div class='row'>
+      <%= yield %>
+    </div>
     <% flash.each do |key, value| %>
       <div class="alert alert-<%= key -%>">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <%= value %>
       </div>
     <% end %>
-
-    <div class='row'>
-      <%= yield %>
-    </div>
     <%#= ENV['RACK_ENV'] %>
   </div>
 </body>

@@ -4,12 +4,14 @@ class ApplicationController < ActionController::Base
   # before_filter :prepare_for_mobile
 
   private
+  def after_sign_out_path_for(resource_or_scope)
+    new_user_session_path
+  end
   def prepare_for_mobile
     request.format = :mobile if mobile_device?
   end
   def mobile_device?
     request.user_agent =~ /Mobile|webOS/
-    true
   end
   helper_method :mobile_device?
 
