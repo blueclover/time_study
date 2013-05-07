@@ -6,13 +6,13 @@
 	<div class="span5" id="log-entries">
 		<table class="table">
 			<tbody>
-				<% @activity_log.recent_log_entries.each do |entry| %>
-					<% today = entry[0] == Date.today %>
-					<tr <%= "class=highlight" if today %>>
+				<% @activity_log.recent_log_entries.each do |row| %>
+					<tr <%= "class=highlight" if row[0] == Date.today %>>
 						<td>
-							<%= link_to entry[0].strftime('%A, %b %e'), entry[1] %>
+							<%= link_to row[0].strftime('%A, %b %e'), 
+													log_entry_url(row[1],row[2]) %>
 						</td>
-						<td class="number"><%= entry[2] %></td>
+						<td class="number"><%= row[3] %></td>
 					</tr>
 				<% end %>
 			</tbody>

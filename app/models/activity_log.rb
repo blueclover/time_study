@@ -14,6 +14,10 @@ class ActivityLog < ActiveRecord::Base
     activities.joins(:activity_category).sum(:hours, group: :activity_category)
   end
 
+  def new_log_entry_url(date)
+    "/activity_logs/#{id}/log_entries/new?date=#{date.strftime('%Y%m%d')}"
+  end
+
   def recent_log_entries
     first_date = Date.today - 1.month
     first_date = start_date if first_date < start_date
@@ -24,10 +28,9 @@ class ActivityLog < ActiveRecord::Base
       le = log_entries.where(date: day).first
       row = [day]
       if le 
-        row + ["/activity_logs/#{id}/log_entries/#{le.id}", le.total_hours]
+        row + [id, le.id, le.total_hours]
       else
-        row + ["/activity_logs/#{id}/log_entries/new?date=#{day.strftime('%Y%m%d')}",
-                'no log entry']
+        row + [id, day, 'no log entry']
       end
     end
   end
@@ -37,8 +40,8 @@ class ActivityLog < ActiveRecord::Base
   end
   
   def create_log_entries
-  	5.times do |n|
-      date = n.days.since(self.start_date).to_date
+    date_range = (start_date..(Date.today - 2.days)).reject{ |d| d.saturday?||d.sunday? }
+    date_range.each do |date|
       entry = log_entries.create!(date: date)
       ActivityCategory.order(:code).each do |category|
         entry.activities.create!(activity_category_id: category)

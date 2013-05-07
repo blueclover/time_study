@@ -49,18 +49,18 @@ end
 def make_surveys
   counties = County.all(limit: 10)
   counties.each do |county|
-    county.surveys.create!(name: "#{county.name} Survey Feb 2013")
+    county.surveys.create!(name: "#{county.name} Survey Feb 2013",
+                           start_date: start_date)
   end
 end
 
 def make_activity_logs
   surveys = Survey.all
-  date = Date.commercial(Date.today.year, Date.today.cweek, 1)
+  # date = Date.commercial(Date.today.year, Date.today.cweek, 1)
   surveys.each do |survey|
     users = User.where(county_id: survey.county.id)
     users.each_with_index do |user, n|
-      # date = Date.commercial(Date.today.year, n + 2, 1)
-      log = survey.activity_logs.build(start_date: date)
+      log = survey.activity_logs.build(start_date: start_date)
       log.user = user
       log.save!
     end
@@ -68,18 +68,22 @@ def make_activity_logs
 end
 
 def make_log_entries
+  date_range = (start_date..(Date.today - 2.days)).reject{ |d| d.saturday? || d.sunday? }
   activity_logs = ActivityLog.all
   activity_logs.each do |log|
-    5.times do |n|
-      date = n.days.since(log.start_date).to_date
+    date_range.each do |date|
       entry = log.log_entries.create!(date: date)
       ActivityCategory.order(:code).each do |activity|
-        hours = rand(40)/4.0 - 6
+        hours = rand(40)/4.0 - 7
         hours = 0 if hours < 0
-        entry.activities.create!(activity_category: activity, hours: hours)
+        entry.activities.create!(activity_category_id: activity.id, hours: hours)
       end
     end
   end
+end
+
+def start_date
+  Date.parse('20130501')
 end
 
 def populate_table(table, timestamps=true)

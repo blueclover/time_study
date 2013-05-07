@@ -25,7 +25,6 @@ class LogEntriesController < ApplicationController
 
   def edit
     @activities = @log_entry.activities.order(:id).limit(4)
-    @hour_options = (0..32).map { |n| n/4.0 }
   end
 
   def update

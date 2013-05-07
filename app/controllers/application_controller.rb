@@ -19,13 +19,20 @@ class ApplicationController < ActionController::Base
     authenticate_user!
     unless current_user.admin?
       #flash[:alert] = "You must be an admin to do that."
-      log_entry = current_user.log_entries.last
-      if log_entry
-        redirect_to [:edit, log_entry.activity_log, log_entry]
+      activity_log = current_user.activity_logs.first
+      log_entry = activity_log.log_entries.where(date: Date.today).first
+      if activity_log
+        if log_entry
+          redirect_to [:edit, log_entry.activity_log, log_entry]
+        else
+          redirect_to activity_log.new_log_entry_url(Date.today)
+        end
       else
         survey = Survey.find_by_county_id(current_user.county_id)
         if survey
-          redirect_to new_survey_activity_log_path(survey)
+          sign_out(current_user)
+          flash[:notice] = "Please contact your MAA coordinator and ask them to create an activity log for your account."
+          redirect_to new_user_session_path
         else
           sign_out(current_user)
           flash[:notice] = "Your county does not have any active surveys."

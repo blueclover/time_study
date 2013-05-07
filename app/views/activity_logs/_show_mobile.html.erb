@@ -3,15 +3,13 @@
 <div class="span4" id="log-entries">
 	<table class="table">
 		<tbody>
-			<% @activity_log.log_entries.order('date desc').each_with_index do |entry, i| %>
-				<% today = entry.date == Date.today %>
-				<tr <%= "class=highlight" if today %>>
+			<% @activity_log.recent_log_entries.each do |row| %>
+				<tr <%= "class=highlight" if row[0] == Date.today %>>
 					<td>
-						<%= link_to entry.date.strftime('%A, %b %e'), 
-										today ? [:edit, @activity_log, entry] : [@activity_log, entry] 
-							%>
+							<%= link_to row[0].strftime('%A, %b %e'), 
+													log_entry_url(row[1],row[2]) %>
 					</td>
-					<td class="number"><%= entry.total_hours %></td>
+					<td class="number"><%= row[3] %></td>
 				</tr>
 			<% end %>
 		</tbody>
