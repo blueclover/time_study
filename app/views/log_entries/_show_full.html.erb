@@ -1,7 +1,16 @@
 <div class='span8'>
-	<h3><%= @log_entry.date.strftime('%A, %B %e, %Y') %></h3>
+	<legend>
+		<%= @log_entry.date.strftime('%A, %B %e, %Y') %>
+	</legend>
 	<div class="span8" id="activities">
 		<table class="table">
+			<thead>
+				<tr>
+					<th>Code</th>
+					<th>Description</th>
+					<th class="number">Hours</th>
+				</tr>
+			</thead>
 			<tbody>
 				<% @activities.each do |activity| %>
 					<tr>
@@ -22,5 +31,8 @@
 		<%= link_to "Edit", [:edit, @activity_log, @log_entry], 
 								class: 'btn' if @log_entry.date < Date.tomorrow %>
 		<%= link_to "View History", [@activity_log.survey, @activity_log], class: "btn" %>
+		<%= link_to "Delete Log Entry", [@activity_log, @log_entry],
+		            method: :delete, confirm: "Are you sure?", 
+								class: 'btn btn-danger ' %>
 	</div>
 </div>

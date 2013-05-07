@@ -1,0 +1,22 @@
+<% provide(:header, @log_entry.date.strftime('%B %e, %Y')) %>
+<%= simple_form_for([@log_entry.activity_log, @log_entry]) do |f| %>
+	<%= f.error_notification %>
+	<div class="mobile-activities">
+		<table class="table" id="activities">
+			<tbody>
+				<%= f.fields_for :activities, @activities do |a| %>
+					<tr>
+						<td>Code <%= a.object.code %></td>
+						<td><%= link_to "-", '#', remote: true, 
+			    								class: 'btn btn-large' %>
+						<span class="fake">	<%= a.object.hours %></span>
+						<%= link_to "+", '#', remote: true,
+			    								class: 'btn btn-large btn-primary' %></td>
+					</tr>
+				<% end -%>
+			</tbody>
+		</table>
+	</div>
+  <%= f.submit "Done", class: 'btn btn-large btn-primary' %>
+<% end -%>
+

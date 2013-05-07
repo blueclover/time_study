@@ -1,6 +1,5 @@
 class Survey < ActiveRecord::Base
-  attr_accessible :description, :name, :county_id,
-  							 :create_with_logs, :default_start_date
+  attr_accessible :description, :name, :county_id, :start_date
 
   belongs_to :county
   has_many :activity_logs, dependent: :destroy
@@ -9,16 +8,7 @@ class Survey < ActiveRecord::Base
 
   validates :name, presence: true
   validates :county_id, presence: true
-
-  attr_reader :create_with_logs, :default_start_date
-
-  def create_with_logs=(value)
-    @create_with_logs = ActiveRecord::ConnectionAdapters::Column.value_to_boolean(value)
-  end
-
-  def default_start_date=(value)
-    @default_start_date = value.to_date
-  end
+  validates :start_date, presence: true
 
   after_create :create_logs
 
@@ -27,24 +17,12 @@ class Survey < ActiveRecord::Base
   end
 
   private
-  	def create_logs
-  		if create_with_logs
-  			users = User.where(county_id: county_id)
-  			if date = default_start_date
-  				users.each do |user|
-  					log = self.activity_logs.build(start_date: date)
-  					log.user = user
-  					log.save!
-  					log.create_log_entries
-  				end
-  			else
-  				users.each do |user|
-  					log = self.activity_logs.build()
-  					log.user = user
-  					log.unconfirmed = true 
-  					log.save!
-  				end
-  			end
-  		end
-  	end
+    def create_logs
+      users = User.where(county_id: county_id).where(admin: false)
+      users.each do |user|
+        log = activity_logs.build(start_date: start_date)
+        log.user = user
+        log.save!
+      end
+    end
 end

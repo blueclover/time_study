@@ -3,6 +3,21 @@ class LogEntriesController < ApplicationController
 	before_filter :find_activity_log
 	before_filter :find_log_entry, only: [:show, :edit, :update, :destroy]
 
+  def new
+    @log_entry = @activity_log.build_log_entry(params[:date])
+    @log_entry.build_activities
+  end
+
+  def create
+    @log_entry = @activity_log.log_entries.build(params[:log_entry])
+    if @log_entry.save
+      flash[:success] = "Log entry has been created."
+      redirect_to [@activity_log, @log_entry]
+    else
+      render :new
+    end
+  end
+
 	def show
 		# @activity_categories = ActivityCategory.order(:code)
 		@activities = @log_entry.activities.order(:id)
@@ -14,13 +29,18 @@ class LogEntriesController < ApplicationController
   end
 
   def update
-    
     if @log_entry.update_attributes(params[:log_entry])
       flash[:success] = "Log entry has been updated."
       redirect_to [@activity_log, @log_entry]
     else
       render :edit
     end
+  end
+
+  def destroy
+    @log_entry.destroy
+    flash[:notice] = "Log entry has been deleted."
+    redirect_to [@activity_log.survey, @activity_log]
   end
 
 	private
