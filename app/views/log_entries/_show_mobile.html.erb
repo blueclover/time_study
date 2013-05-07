@@ -21,7 +21,7 @@
 								class: 'btn' if @log_entry.date < Date.tomorrow %>
 		<%= link_to "View History", [@activity_log.survey, @activity_log], 
 								class: "btn" %>
-		<%= link_to "Delete Log Entry", [@activity_log, @log_entry],
+		<%= link_to "Delete", [@activity_log, @log_entry],
 		            method: :delete, confirm: "Are you sure?", 
 								class: 'btn btn-danger ' %>
 	</div>
