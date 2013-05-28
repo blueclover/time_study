@@ -16,7 +16,7 @@ class LogEntry < ActiveRecord::Base
   end
 
   def build_activities
-  	ActivityCategory.order(:code).each do |category|
+  	ActivityCategory.order(:id).each do |category|
   		activities.build(activity_category_id: category.id, hours: 0)
   	end
   end

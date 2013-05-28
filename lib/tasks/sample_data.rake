@@ -20,10 +20,12 @@ def make_users
   admin.admin = true
   admin.save!
 
-  County.first.users.create(email: "user@alameda.org",
+  user = County.first.users.build(email: "user@alameda.org",
                             password: password,
                             password_confirmation: password,
                             job_classification_id: 1)
+  user.authentication_token = "user_token"
+  user.save!
 
   counties = County.all(limit: 2)
   jobs = JobClassification.all
