@@ -6,6 +6,7 @@ class LogEntry < ActiveRecord::Base
 
   accepts_nested_attributes_for :activities
 
+  validates :activity_log_id, presence: true
   validates :date, presence: true
   validates_uniqueness_of :date, scope: :activity_log_id
 

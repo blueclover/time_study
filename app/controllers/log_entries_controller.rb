@@ -10,6 +10,7 @@ class LogEntriesController < ApplicationController
 
   def create
     @log_entry = @activity_log.log_entries.build(params[:log_entry])
+    # raise "error"
     if @log_entry.save
       flash[:success] = "Log entry has been created."
       redirect_to [@activity_log, @log_entry]
