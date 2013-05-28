@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328202741) do
+ActiveRecord::Schema.define(:version => 20130528160946) do
 
   create_table "activities", :force => true do |t|
     t.integer  "log_entry_id"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20130328202741) do
     t.boolean  "admin",                  :default => false
     t.integer  "county_id"
     t.integer  "job_classification_id"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["county_id"], :name => "index_users_on_county_id"

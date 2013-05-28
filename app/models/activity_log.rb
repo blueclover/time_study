@@ -14,6 +14,14 @@ class ActivityLog < ActiveRecord::Base
     activities.joins(:activity_category).sum(:hours, group: :activity_category)
   end
 
+  def self.accessible_to(user)
+    if user.admin?
+      scoped
+    else
+      where(user_id: user.id)
+    end
+  end
+
   def new_log_entry_url(date)
     "/activity_logs/#{id}/log_entries/new?date=#{date.strftime('%Y%m%d')}"
   end

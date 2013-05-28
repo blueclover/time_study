@@ -29,9 +29,6 @@ class ActivityLogsController < ApplicationController
   end
 
   def show
-    if @activity_log.unconfirmed
-      redirect_to [:edit, @survey, @activity_log]
-    end
   end
 
   def edit
@@ -71,9 +68,9 @@ class ActivityLogsController < ApplicationController
 
     def find_activity_log
       if @survey
-        @activity_log = @survey.activity_logs.find(params[:id])
+        @activity_log = @survey.activity_logs.accessible_to(current_user).find(params[:id])
       else
-        @activity_log = ActivityLog.find(params[:id])
+        @activity_log = ActivityLog.accessible_to(current_user).find(params[:id])
       end
     rescue ActiveRecord::RecordNotFound
       flash[:alert] = "The record you were looking" +

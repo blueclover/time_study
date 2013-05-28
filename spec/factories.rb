@@ -14,6 +14,8 @@ FactoryGirl.define do
 
   factory :survey do
     sequence(:name) { |n| "Example survey #{n}" }
+    county
+    start_date 0.days.ago
   end
 
   factory :activity_log do

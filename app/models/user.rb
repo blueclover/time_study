@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :rememberable, :recoverable, :token_authenticatable, :confirmable,
+  # :rememberable, :recoverable, :confirmable,
   # :lockable and :omniauthable, :timeoutable, :registerable
-  devise :database_authenticatable,
+  devise :database_authenticatable, :token_authenticatable,
          :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
 
   validates :county_id, presence: :true, unless: :admin
   validates :job_classification_id, presence: :true, unless: :admin
+
+  before_save :ensure_authentication_token
 
   def timeout_in
     30.minutes
