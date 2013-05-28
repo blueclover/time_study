@@ -1,6 +1,6 @@
-name,code,weight,description
-General Admin,21,,"Activities related to being an employee but not for a specific program, such as attending general staff meetings, monitoring program budgets, site management, non-program supervision of staff, paid brake time, and time spent filling out the MAA/TCM Time Survey"
-Outreach,4,0.75,Outreach activities designed to bring potential eligibles into the Medi-Cal system or connect Medi-Cal eligibles with Medi-Cal services
-Referral,6,,"Making referrals for, coordinating, and monitoring the delivery of Medi-Cal services, such as referring a client for a physical exam and following up to see if further referrals are needed"
-Facilitation Application,8,,"Supporting an individual to understand and apply for Medi-Cal, including collecting documents, explaining the process, and packaging the application"
-Transportation,10,,"Arranging or providing transportation to or from a Medi-Cal service, such as a doctor's appoint or home from the hospital"
+name,code,weight
+General Admin,21,
+Outreach,4,0.75
+Referral,6,
+Facilitation Application,8,
+Transportation,10,

@@ -15,18 +15,18 @@ FactoryGirl.define do
   factory :survey do
     sequence(:name) { |n| "Example survey #{n}" }
     county
-    start_date 0.days.ago
+    start_date 0.days.ago.to_date
   end
 
   factory :activity_log do
   	survey
   	user
-    start_date 0.days.ago
+    start_date 0.days.ago.to_date
   end
 
   factory :log_entry do
     activity_log
-    sequence(:date) { |n| n.days.from_now }
+    sequence(:date) { |n| n.days.ago.to_date }
   end
 
   factory :county do

@@ -27,7 +27,7 @@ TimeStudy::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :activity_logs
+      resources :log_entries
     end
   end
 
