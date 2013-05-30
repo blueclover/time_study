@@ -70,7 +70,7 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing :skip => :sessions to `devise_for` in your config/routes.rb
-  config.skip_session_storage = [:http_auth]
+  config.skip_session_storage = [:http_auth, :token_auth]
 
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
@@ -237,4 +237,23 @@ Devise.setup do |config|
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
+
+  # Override the TokenAutheticatable module
+  require 'devise/strategies/token_authenticatable'
+  module Devise
+    module Strategies
+      class TokenAuthenticatable < Authenticatable
+        def params_auth_hash
+          return_params = if params[scope].kind_of?(Hash) && params[scope].has_key?(authentication_keys.first)
+            params[scope]
+          else
+            params
+          end
+          token = ActionController::HttpAuthentication::Token.token_and_options(request)
+          return_params.merge!(:auth_token => token[0]) if token
+          return_params
+        end
+      end
+    end
+  end
 end

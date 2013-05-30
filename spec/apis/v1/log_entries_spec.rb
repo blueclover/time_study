@@ -12,7 +12,7 @@ describe "/api/v1/log_entries", type: :api do
 		it "json" do
 			get "#{url}.json", token: token
 			log_entries_json = 
-					ActivityLog.accessible_to(user).first.log_entries.to_json
+					ActivityLog.where(user_id: user.id).first.log_entries.to_json
 			last_response.body.should eql(log_entries_json)
 			last_response.status.should eql(200)
 			log_entries = JSON.parse(last_response.body)
