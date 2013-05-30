@@ -21,11 +21,11 @@ class LogEntriesController < ApplicationController
 
 	def show
 		# @activity_categories = ActivityCategory.order(:code)
-		@activities = @log_entry.activities.order(:id)
+		@activities = @log_entry.activities.order(:activity_category_id)
 	end
 
   def edit
-    @activities = @log_entry.activities.order(:id).limit(4)
+    @activities = @log_entry.activities.order(:activity_category_id).limit(4)
   end
 
   def update

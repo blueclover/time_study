@@ -24,7 +24,7 @@ class Api::V1::LogEntriesController < ApplicationController
 		# end
 		  render :status => :ok,
              :json => { :success => true,
-                        :info => {},
+                        :info => "Log entry successfully submitted.",
                         :data => {} }
     else
       render :status => :unprocessable_entity,
