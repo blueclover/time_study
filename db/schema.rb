@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130528223554) do
+ActiveRecord::Schema.define(:version => 20130531222150) do
 
   create_table "activities", :force => true do |t|
     t.integer  "log_entry_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20130528223554) do
     t.integer  "activity_log_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.float    "hours"
   end
 
   add_index "log_entries", ["activity_log_id", "date"], :name => "index_log_entries_on_activity_log_id_and_date", :unique => true

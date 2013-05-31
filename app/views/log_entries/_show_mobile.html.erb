@@ -3,6 +3,12 @@
 	<div class="span8" id="activities">
 		<table class="table">
 			<tbody>
+				<thead>
+				<tr>
+					<th>Total hours</td>
+					<th class="number"><%= @log_entry.hours %></td>
+				</tr>
+				</thead>
 				<% @activities.each do |activity| %>
 					<tr>
 						<td><%= activity.name %></td>

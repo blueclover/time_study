@@ -22,7 +22,7 @@ class Api::V1::LogEntriesController < ApplicationController
 		# else
 		# 	respond_with(log_entry)
 		# end
-		  render :status => :ok,
+		  render :status => :created,
              :json => { :success => true,
                         :info => "Log entry successfully submitted.",
                         :data => {} }
