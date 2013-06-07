@@ -34,17 +34,22 @@ class ActivityLog < ActiveRecord::Base
 
     days.map do |day|
       le = log_entries.where(date: day).first
-      row = [day]
-      if le 
-        row + [id, le.id, le.total_hours]
+      row = [day, id]
+      if le
+        row << le.id
+        if le.hours > 0
+          row + [le.total_hours]
+        else
+          row + ['unpaid time off']
+        end
       else
-        row + [id, day, 'no log entry']
+        row + [day, 'no log entry']
       end
     end
   end
 
-  def build_log_entry(date)
-    log_entries.new(date: date)
+  def build_log_entry(date, default_hours)
+    log_entries.new(date: date, hours: default_hours)
   end
   
   def create_log_entries

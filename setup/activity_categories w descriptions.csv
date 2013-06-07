@@ -1,6 +1,10 @@
-name,code,weight,description
-General Admin,21,,"Activities related to being an employee but not for a specific program, such as attending general staff meetings, monitoring program budgets, site management, non-program supervision of staff, paid brake time, and time spent filling out the MAA/TCM Time Survey"
-Outreach,4,0.75,Outreach activities designed to bring potential eligibles into the Medi-Cal system or connect Medi-Cal eligibles with Medi-Cal services
-Referral,6,,"Making referrals for, coordinating, and monitoring the delivery of Medi-Cal services, such as referring a client for a physical exam and following up to see if further referrals are needed"
-Facilitating Application,8,,"Supporting an individual to understand and apply for Medi-Cal, including collecting documents, explaining the process, and packaging the application"
-Transportation,10,,"Arranging or providing transportation to or from a Medi-Cal service, such as a doctor's appoint or home from the hospital"
+name,alias,code,weight,description
+General Admin,General Admin,21,,"Activities related to being an employee but not for a specific program, such as attending general staff meetings, monitoring program budgets, site management, non-program supervision of staff, paid brake time, and time spent filling out the MAA/TCM Time Survey"
+Medi-Cal Outreach,MAA Outreach,4,0.75,Outreach activities designed to bring potential eligibles into the Medi-Cal system or connect Medi-Cal eligibles with Medi-Cal services
+"Medi-Cal Referral, Coordination, and Monitoring",MAA Referral,6,,"Making referrals for, coordinating, and monitoring the delivery of Medi-Cal services, such as referring a client for a physical exam and following up to see if further referrals are needed"
+Facilitating Medi-Cal Application,MAA Application,8,,"Supporting an individual to understand and apply for Medi-Cal, including collecting documents, explaining the process, and packaging the application"
+Arranging/Providing Transportation to Medi-Cal Services,MAA Transportation,10,,"Arranging or providing transportation to or from a Medi-Cal service, such as a doctor's appoint or home from the hospital"
+Non-Medi-Cal Outreach,Other Outreach,3,,"Outreach for general preventive health programs, or about social, educational, legal or other services"
+"Non-Medi-Cal Referral, Coordination, and Monitoring",Other Referral,5,,"Making referrals, coordinating, and monitoring the delivery of services not covered by Medi-Cal, such as social services"
+Facilitating Non-Medi-Cal Application,Other Application,7,,"Informing and supporting individuals to apply for social or educational programs, such as TANF, food stamps, or WIC"
+Arranging/Providing Transportation to Non-Medi-Cal Services,Other Transportation,9,,"Arranging transportation to social, educational, or other non-Medi-Cal services, such as the employment center or a senior center"

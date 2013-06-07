@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130531222150) do
+ActiveRecord::Schema.define(:version => 20130607175353) do
 
   create_table "activities", :force => true do |t|
     t.integer  "log_entry_id"
@@ -100,5 +100,8 @@ ActiveRecord::Schema.define(:version => 20130531222150) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["job_classification_id"], :name => "index_users_on_job_classification_id"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  add_foreign_key "activities", "activity_categories", :name => "activities_activity_category_id_fk", :dependent => :restrict
+  add_foreign_key "activities", "log_entries", :name => "activities_log_entry_id_fk", :dependent => :delete
 
 end

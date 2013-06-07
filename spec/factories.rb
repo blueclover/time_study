@@ -27,6 +27,7 @@ FactoryGirl.define do
   factory :log_entry do
     activity_log
     sequence(:date) { |n| n.days.ago.to_date }
+    hours 8
   end
 
   factory :county do

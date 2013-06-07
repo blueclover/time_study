@@ -4,7 +4,10 @@ class LogEntriesController < ApplicationController
 	before_filter :find_log_entry, only: [:show, :edit, :update, :destroy]
 
   def new
-    @log_entry = @activity_log.build_log_entry(params[:date])
+    # log_entry = @activity_log.log_entries.where(date: params[:date]).first
+    # log_entry.destroy if log_entry
+
+    @log_entry = @activity_log.build_log_entry(params[:date], 8)
     @log_entry.build_activities
   end
 

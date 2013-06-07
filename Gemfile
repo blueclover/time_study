@@ -4,6 +4,7 @@ gem 'pg'
 gem 'rails', '3.2.8'
 
 gem 'dynamic_form'
+gem 'foreigner'
 
 gem 'jquery-rails'
 gem 'faker'
