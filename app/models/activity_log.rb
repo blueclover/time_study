@@ -26,11 +26,19 @@ class ActivityLog < ActiveRecord::Base
     "/activity_logs/#{id}/log_entries/new?date=#{date.strftime('%Y%m%d')}"
   end
 
+  def recent_log_entry_dates
+    first_date = Date.today - 2.weeks
+
+    dates = ""
+    log_entries.where("date > ?", first_date).map(&:date)
+  end
+
   def recent_log_entries
     first_date = Date.today - 1.month
     first_date = start_date if first_date < start_date
 
-    days = (first_date..Date.today).reject{|d| d.saturday?||d.sunday?}.reverse
+    # days = (first_date..Date.today).reject{|d| d.saturday?||d.sunday?}.reverse
+    days = (first_date..Date.today).to_a.reverse
 
     days.map do |day|
       le = log_entries.where(date: day).first

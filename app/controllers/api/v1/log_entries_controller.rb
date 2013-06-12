@@ -8,7 +8,10 @@ class Api::V1::LogEntriesController < ApplicationController
 	
 	def index
 		if activity_log = ActivityLog.where(user_id: current_user.id).first
-			respond_with(activity_log.log_entries)
+			render status: :created,
+             json: { success: true,
+                        info: "Request successful.",
+                        data: activity_log.recent_log_entry_dates }
 		else
 			respond_with({ error: "No log entries." })
 		end

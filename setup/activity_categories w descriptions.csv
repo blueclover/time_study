@@ -1,10 +1,20 @@
 name,alias,code,weight,description
 General Admin,General Admin,21,,"Activities related to being an employee but not for a specific program, such as attending general staff meetings, monitoring program budgets, site management, non-program supervision of staff, paid brake time, and time spent filling out the MAA/TCM Time Survey"
-Medi-Cal Outreach,MAA Outreach,4,0.75,Outreach activities designed to bring potential eligibles into the Medi-Cal system or connect Medi-Cal eligibles with Medi-Cal services
-"Medi-Cal Referral, Coordination, and Monitoring",MAA Referral,6,,"Making referrals for, coordinating, and monitoring the delivery of Medi-Cal services, such as referring a client for a physical exam and following up to see if further referrals are needed"
-Facilitating Medi-Cal Application,MAA Application,8,,"Supporting an individual to understand and apply for Medi-Cal, including collecting documents, explaining the process, and packaging the application"
-Arranging/Providing Transportation to Medi-Cal Services,MAA Transportation,10,,"Arranging or providing transportation to or from a Medi-Cal service, such as a doctor's appoint or home from the hospital"
 Non-Medi-Cal Outreach,Other Outreach,3,,"Outreach for general preventive health programs, or about social, educational, legal or other services"
+Medi-Cal Outreach,MAA Outreach,4,0.75,Outreach activities designed to bring potential eligibles into the Medi-Cal system or connect Medi-Cal eligibles with Medi-Cal services
 "Non-Medi-Cal Referral, Coordination, and Monitoring",Other Referral,5,,"Making referrals, coordinating, and monitoring the delivery of services not covered by Medi-Cal, such as social services"
+"Medi-Cal Referral, Coordination, and Monitoring",MAA Referral,6,,"Making referrals for, coordinating, and monitoring the delivery of Medi-Cal services, such as referring a client for a physical exam and following up to see if further referrals are needed"
 Facilitating Non-Medi-Cal Application,Other Application,7,,"Informing and supporting individuals to apply for social or educational programs, such as TANF, food stamps, or WIC"
+Facilitating Medi-Cal Application,MAA Application,8,,"Supporting an individual to understand and apply for Medi-Cal, including collecting documents, explaining the process, and packaging the application"
 Arranging/Providing Transportation to Non-Medi-Cal Services,Other Transportation,9,,"Arranging transportation to social, educational, or other non-Medi-Cal services, such as the employment center or a senior center"
+Arranging/Providing Transportation to Medi-Cal Services,MAA Transportation,10,,"Arranging or providing transportation to or from a Medi-Cal service, such as a doctor's appoint or home from the hospital"
+Non-Medi-Cal Contract Administration,Other Contract Admin,11,,"Entering into contracts with providers or vendors for non-Medi-Cal services, such as security alarms or social services"
+Medi-Cal Contract Administration (A),MAA Contract Admin A,12,,"Entering into contracts for Medi-Cal services directed toward only Medi-Cal populations, monitoring contracts, paying contract invoices, and ensuring contractor compliance"
+Medi-Cal Contract Administration (B),MAA Contract Admin B,13,,"Entering into contracts for Medi-Cal services directed toward Medi-Cal and non-Medi-Cal populations, monitoring contracts, paying contract invoices, and ensuring contractor compliance"
+Non-Medi-Cal Program Planning and Policy Development,Other Planning,14,,"Policy and planning activities associated with non-Medi-Cal services, such as CalWORKS or social services"
+Medi-Cal Program Planning and Policy Development (A) (Non-Enhanced),MAA Planning A reg,15,,"Developing strategies to increase system capacity and close Medi-Cal service gaps, including analyzing data related to Medi-Cal programs or a Medi-Cal group, interagency coordination to improve delivery of Medi-Cal services, or developing resource directories of Medi-Cal services or providers"
+Medi-Cal Program Planning and Policy Development (A) (SPMP),MAA Planning A SPMP,16,,
+Medi-Cal Program Planning and Policy Development (B) (Non-Enhanced),MAA Planning B reg,17,,
+Medi-Cal Program Planning and Policy Development (B) (SPMP),MAA Planning B SPMP,18,,
+Paid Time Off,Paid Time Off,22,,"Vacation, sick leave, paid holiday time, paid jury duty, and any other paid employee time off"
+Other Programs and Activities,Other Activities,1,,Performing a service that is not Medi-Cal related or medical in nature

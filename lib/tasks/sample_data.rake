@@ -75,7 +75,7 @@ def make_log_entries
   activity_logs.each do |log|
     date_range.each do |date|
       entry = log.log_entries.create!(date: date, hours: 8)
-      ActivityCategory.order(:code).each do |activity|
+      ActivityCategory.order(:id).limit(9).each do |activity|
         hours = rand(40)/4.0 - 7
         hours = 0 if hours < 0
         entry.activities.create!(activity_category_id: activity.id, hours: hours)
