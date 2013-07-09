@@ -5,7 +5,7 @@ describe "Activity Log pages" do
 
   survey_name = "Test Survey"
   let!(:survey) { create(:survey, name: survey_name) }
-  let!(:user) { create(:user) }
+  let!(:user) { create(:admin) }
   let!(:log) { create(:activity_log, survey: survey) }
 
   before do
@@ -50,7 +50,7 @@ describe "Activity Log pages" do
     end
 
     describe "view" do
-      it { should have_content("Activity Log Starting") }
+      it { should have_content("Activity Log") }
     end
 
     # describe "edit" do

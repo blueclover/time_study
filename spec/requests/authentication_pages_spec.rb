@@ -9,35 +9,8 @@ describe "Authenication pages" do
     visit root_path
   end
 
-  describe "user creation" do
-    before { click_link 'Sign up' }
-
-    describe "with valid data" do
-      before do
-        page.select(admin.county.name, from: "County")
-        page.select(admin.job_classification.name, from: "Job classification")
-        fill_in "Email", with: "user@alameda.org"
-        fill_in "Password", with: "password"
-        fill_in "Password confirmation", with: "password"
-        click_button "Sign Up"
-      end
-
-      it { should have_content("Your county does not have any active surveys.") }
-    end
-
-    describe "with invalid data" do
-      before do
-        fill_in "Email", with: ""
-        click_button "Sign Up"
-      end
-
-      it { should have_content("Email can't be blank") }
-    end
-  end
-
   describe "user signin" do
     before do
-      click_link "Sign in"
       fill_in "Email", with: admin.email
       fill_in "Password", with: admin.password
       click_button "Sign in"

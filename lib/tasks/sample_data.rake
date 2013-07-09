@@ -27,7 +27,7 @@ def make_users
   user.authentication_token = "user_token"
   user.save!
 
-  counties = County.all(limit: 2)
+  counties = County.all(limit: 1)
   jobs = JobClassification.all
   counties.each do |county|
     staff_count = 1
@@ -51,7 +51,7 @@ end
 def make_surveys
   counties = County.all(limit: 10)
   counties.each do |county|
-    county.surveys.create!(name: "#{county.name} Survey Feb 2013",
+    county.surveys.create!(name: "#{county.name} Survey 2013",
                            start_date: start_date)
   end
 end
@@ -85,7 +85,7 @@ def make_log_entries
 end
 
 def start_date
-  Date.parse('20130501')
+  Date.parse('20130601')
 end
 
 def populate_table(table, timestamps=true)

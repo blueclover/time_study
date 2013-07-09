@@ -9,7 +9,7 @@ gem 'foreigner'
 gem 'jquery-rails'
 gem 'faker'
 
-gem 'devise'
+gem 'devise', '2.2.4'
 gem 'email_spec'
 
 gem 'simple_form'
@@ -31,15 +31,15 @@ group :assets do
 
   gem 'jquery-ui-rails'
 
-  gem 'twitter-bootstrap-rails'
+  gem 'twitter-bootstrap-rails', '2.2.3'
   gem 'libv8'
   gem 'less-rails'
-  gem 'therubyracer'
+  gem 'therubyracer', '~>0.11.4'
 end
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller'
+  gem 'binding_of_caller', '~>0.7.2'
   gem 'meta_request'
 end
 
@@ -47,6 +47,9 @@ group :test do
   gem 'capybara', '~> 1.1.2'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'rb-inotify', '~> 0.8.8'
-  gem 'libnotify'
+
+
+# linux:
+  # gem 'rb-inotify', '~> 0.8.8'
+  # gem 'libnotify'
 end

@@ -5,22 +5,23 @@ describe "/api/v1/log_entries", type: :api do
 	let!(:token)  { user.authentication_token }
 	let!(:user_log) { create(:activity_log, user_id: user.id) }
 	let!(:user_entry) { create(:log_entry, 
-															activity_log_id: user_log.id,
-															date: Date.yesterday) }
+						activity_log_id: user_log.id,
+						date: Date.yesterday) }
 	let!(:other_entry) { create(:log_entry) }
 
-	context "log entries viewable by this user" do
+	describe "log entries viewable by this user" do
 		let(:url) { "/api/v1/log_entries" }
-		it "json" do
+		it "returns correct JSON" do
 			get "#{url}.json", auth_token: token
-			log_entries_json = 
-					ActivityLog.where(user_id: user.id).first.log_entries.to_json
-			last_response.body.should eql(log_entries_json)
 			last_response.status.should eql(200)
-			log_entries = JSON.parse(last_response.body)
-			log_entries.any? do |json|
-				json["date"] == user_entry.date.to_s
-			end.should be_true
+			body = JSON.parse(last_response.body)
+			body.should include('data')
+			data = body['data']
+			data.should have(1).item
+			data.first.should eql(user_entry.date.to_s)
+			# data.any? do |item|
+			# 	item == user_entry.date.to_s
+			# end.should be_true
 		end
 	end
 

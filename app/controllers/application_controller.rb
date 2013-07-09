@@ -21,8 +21,8 @@ class ApplicationController < ActionController::Base
     unless current_user.admin?
       #flash[:alert] = "You must be an admin to do that."
       activity_log = current_user.activity_logs.first
-      log_entry = activity_log.log_entries.where(date: Date.today).first
       if activity_log
+        log_entry = activity_log.log_entries.where(date: Date.today).first
         if log_entry
           redirect_to [:edit, log_entry.activity_log, log_entry]
         else

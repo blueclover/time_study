@@ -8,7 +8,7 @@ class Api::V1::LogEntriesController < ApplicationController
 	
 	def index
 		if activity_log = ActivityLog.where(user_id: current_user.id).first
-			render status: :created,
+			render status: :ok,
              json: { success: true,
                         info: "Request successful.",
                         data: activity_log.recent_log_entry_dates }
@@ -30,11 +30,11 @@ class Api::V1::LogEntriesController < ApplicationController
              :json => { :success => true,
                         :info => "Log entry successfully submitted.",
                         :data => {} }
-    else
-      render :status => :ok,
-             :json => { :success => false,
-                        :info => log_entry.errors,
-                        :data => {} }
-    end
+	    else
+	      render :status => :ok,
+	             :json => { :success => false,
+                 :info => log_entry.errors,
+                 :data => {} }
+    	end
 	end
 end

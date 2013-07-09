@@ -31,7 +31,7 @@ FactoryGirl.define do
   end
 
   factory :county do
-    sequence(:name) { |n| "Example survey #{n}" }
+    sequence(:name) { |n| "County #{n}" }
   end
 
   factory :job_classification do
