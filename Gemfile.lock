@@ -247,7 +247,7 @@ DEPENDENCIES
   capybara (~> 1.1.2)
   coffee-rails
   database_cleaner
-  devise
+  devise (= 2.2.4)
   dynamic_form
   email_spec
   factory_girl_rails
