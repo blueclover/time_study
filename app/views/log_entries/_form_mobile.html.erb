@@ -1,4 +1,9 @@
 <% provide(:header, @log_entry.date.strftime('%A, %b %e')) %>
+<% if params[:show_all] == '1' %>
+  <%= link_to "Show Favorites", date: @log_entry.date.strftime('%Y%m%d'), show_all: 0 %>
+<% else %>
+  <%= link_to "Show All Activities", date: @log_entry.date.strftime('%Y%m%d'), show_all: 1 %>
+<% end %>
 <%= simple_form_for([@log_entry.activity_log, @log_entry]) do |f| %>
 	<%= f.error_notification %>
 	<%= f.hidden_field :date %>

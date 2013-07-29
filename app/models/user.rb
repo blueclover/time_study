@@ -24,7 +24,18 @@ class User < ActiveRecord::Base
   before_save :ensure_authentication_token
 
   def favorite_activities
-    FavoriteActivity.order(:activity_category_id).map(&:activity_category_id)
+    if FavoriteActivity.where(user_id: id).present?
+      activities = FavoriteActivity.where(county_id: county).where(user_id: id)
+    elsif FavoriteActivity.where(county_id: county).where(job_classification_id: job_classification).present?
+      activities = FavoriteActivity.where(county_id: county).where(job_classification_id: job_classification)
+    elsif FavoriteActivity.where(county_id: county).where(job_classification_id: nil).present?
+      activities = FavoriteActivity.where(county_id: county).where(job_classification_id: nil)
+    end
+    if activities
+      activities.order(:activity_category_id).map(&:activity_category_id)
+    else
+      []
+    end
   end
 
   def timeout_in
