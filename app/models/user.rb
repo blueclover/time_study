@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
+  def favorite_activities
+    FavoriteActivity.order(:activity_category_id).map(&:activity_category_id)
+  end
+
   def timeout_in
     30.minutes
   end

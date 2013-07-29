@@ -8,7 +8,7 @@ class LogEntriesController < ApplicationController
     # log_entry.destroy if log_entry
 
     @log_entry = @activity_log.build_log_entry(params[:date], 8)
-    @log_entry.build_activities
+    @log_entry.build_activities(params[:show_all]=='1')
   end
 
   def create

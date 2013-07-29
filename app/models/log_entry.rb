@@ -4,6 +4,8 @@ class LogEntry < ActiveRecord::Base
   belongs_to :activity_log
   has_many :activities
 
+  delegate :user, to: :activity_log
+
   accepts_nested_attributes_for :activities
 
   validates :activity_log_id, presence: true
@@ -16,9 +18,16 @@ class LogEntry < ActiveRecord::Base
   	activities.sum(:hours) || "unpaid time off"
   end
 
-  def build_activities
-  	ActivityCategory.order(:id).each do |category|
-  		activities.build(activity_category_id: category.id, hours: 0)
+  def build_activities(show_all)
+    
+    if show_all
+      categories = ActivityCategory.order(:id).map(&:id)
+    else
+      categories = user.favorite_activities
+    end
+    
+    categories.each do |category|
+  		activities.build(activity_category_id: category, hours: 0)
   	end
   end
 end

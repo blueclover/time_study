@@ -1,4 +1,11 @@
 <div class='span8'>
+
+	<% if params[:show_all] == '1' %>
+    <%= link_to "Show Only Favorite Activities", date: @log_entry.date.strftime('%Y%m%d'), show_all: 0 %>
+  <% else %>
+    <%= link_to "Show All Activities", date: @log_entry.date.strftime('%Y%m%d'), show_all: 1 %>
+  <% end %>
+
 	<%= simple_form_for([@activity_log, @log_entry]) do |f| %>
 		<legend><%= @log_entry.date.strftime('%A, %B %e, %Y') %></legend>
 		<%= f.error_notification %>

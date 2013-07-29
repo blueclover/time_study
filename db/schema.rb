@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130607179353) do
+ActiveRecord::Schema.define(:version => 20130729190751) do
 
   create_table "activities", :force => true do |t|
     t.integer  "log_entry_id"
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(:version => 20130607179353) do
   end
 
   add_index "counties", ["name"], :name => "index_counties_on_name", :unique => true
+
+  create_table "favorite_activities", :force => true do |t|
+    t.integer "user_id"
+    t.integer "county_id"
+    t.integer "job_classification_id"
+    t.integer "activity_category_id",  :null => false
+  end
+
+  add_index "favorite_activities", ["county_id"], :name => "index_favorite_activities_on_county_id"
+  add_index "favorite_activities", ["job_classification_id"], :name => "index_favorite_activities_on_job_classification_id"
+  add_index "favorite_activities", ["user_id"], :name => "index_favorite_activities_on_user_id"
 
   create_table "job_classifications", :force => true do |t|
     t.string "name"
