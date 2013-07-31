@@ -2,13 +2,14 @@ class LogEntriesController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :find_activity_log
 	before_filter :find_log_entry, only: [:show, :edit, :update, :destroy]
+  before_filter :build_favorites
 
   def new
     # log_entry = @activity_log.log_entries.where(date: params[:date]).first
     # log_entry.destroy if log_entry
 
     @log_entry = @activity_log.build_log_entry(params[:date], 8)
-    @log_entry.build_activities(params[:show_all]=='1')
+    @log_entry.build_activities
   end
 
   def create
@@ -29,12 +30,17 @@ class LogEntriesController < ApplicationController
 
   def edit
     @activities = @log_entry.activities.order(:activity_category_id)
+    @log_entry.check_hours if params[:invalid]
   end
 
   def update
     if @log_entry.update_attributes(params[:log_entry])
-      flash[:success] = "Log entry has been updated."
-      redirect_to [@activity_log, @log_entry]
+      if @log_entry.sum_hours <= @log_entry.hours
+        flash[:success] = "Log entry has been updated."
+        redirect_to [@activity_log, @log_entry]
+      else
+        redirect_to action: 'edit', invalid: true
+      end
     else
       render :edit
     end
@@ -61,5 +67,10 @@ class LogEntriesController < ApplicationController
       flash[:alert] = "The record you were looking" +
           " for could not be found."
       redirect_to [@activity_log.survey, @activity_log]
+    end
+
+    def build_favorites
+      @favorite_activities = current_user.favorite_activities
+      @favorite_activities += @log_entry.activity_ids_with_hours if @log_entry
     end
 end

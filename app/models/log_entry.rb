@@ -14,20 +14,22 @@ class LogEntry < ActiveRecord::Base
   validates_uniqueness_of :date, scope: :activity_log_id
 
 
-  def total_hours
-  	activities.sum(:hours) || "unpaid time off"
+  def sum_hours
+  	activities.sum(:hours)
   end
 
-  def build_activities(show_all)
-    
-    if show_all
-      categories = ActivityCategory.order(:id).map(&:id)
-    else
-      categories = user.favorite_activities
-    end
-    
-    categories.each do |category|
-  		activities.build(activity_category_id: category, hours: 0)
+  def build_activities    
+    ActivityCategory.order(:id).each do |category|
+  		activities.build(activity_category_id: category.id, hours: 0)
   	end
+  end
+
+  def activity_ids_with_hours
+    activities_with_hours = activities.where("hours > 0")
+    activities_with_hours.map(&:activity_category_id) if activities_with_hours
+  end
+
+  def check_hours    
+    errors.add(:hours, "Sum of activity hours cannot exceed total hours worked") unless sum_hours <= hours
   end
 end

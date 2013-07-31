@@ -46,7 +46,7 @@ class ActivityLog < ActiveRecord::Base
       if le
         row << le.id
         if le.hours > 0
-          row + [le.total_hours]
+          row + [le.sum_hours]
         else
           row + ['unpaid time off']
         end

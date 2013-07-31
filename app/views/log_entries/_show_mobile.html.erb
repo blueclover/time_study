@@ -17,7 +17,7 @@
 				<% end -%>
 				<tr>
 					<td>Other</td>
-					<td class="number"><%= 8 - @log_entry.total_hours || 0 %></td>
+					<td class="number"><%= @log_entry.hours - @log_entry.sum_hours || 0 %></td>
 				</tr>
 			</tbody>
 		</table>

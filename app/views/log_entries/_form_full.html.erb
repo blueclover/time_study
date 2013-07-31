@@ -11,8 +11,11 @@
 		<%= f.error_notification %>
 		<%= f.hidden_field :date %>
 		<div class="span8" id="activities">
-			Total hours:
-			<%= f.text_field :hours, class: 'hours' %>
+			<div class="control-group error">
+				Total hours:
+				<%= f.text_field :hours, class: 'hours' %>
+				<%= f.error :hours %>
+			</div>
 			<table class="table">
 				<thead>
 					<tr>
@@ -24,18 +27,23 @@
 				<tbody>
 					<%= f.fields_for :activities, @activities do |a| %>
 						<%= a.hidden_field :activity_category_id %>
-						<tr>
-							<td><%= a.object.code %></td>
-							<td><%= a.object.name %></td>
-							<td><%= a.text_field :hours, class: 'hours' %></td>
-						</tr>
+						<% unless params[:show_all] == '1' or @favorite_activities.include? a.object.activity_category_id %>
+							<%= a.hidden_field :hours %>
+						<% else %>
+							<tr>
+								<td><%= a.object.code %></td>
+								<td><%= a.object.name %></td>
+								<td><%= a.text_field :hours, class: 'hours' %></td>
+							</tr>
+						<% end -%>
 					<% end -%>
 				</tbody>
 			</table>
-			<div class="form-actions">
-		    <%= f.submit "Save", class: 'btn btn-primary' %>
-		    <%= link_to "Cancel", :back, class: "btn" %>
-		  </div>
-	  <% end -%>
-	</div>
+		</div>
+		<div class="form-actions">
+	    <%= f.submit "Save", class: 'btn btn-primary' %>
+	    <%= link_to "Cancel", :back, class: "btn" %>
+	  </div>
+  <% end -%>
+	
 </div>
