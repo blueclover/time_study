@@ -11,7 +11,7 @@
 		<%= f.error_notification %>
 		<%= f.hidden_field :date %>
 		<div class="span8" id="activities">
-			<div class="control-group error">
+			<div class="control-group <%= "error" if params[:invalid] %>">
 				Total hours:
 				<%= f.text_field :hours, class: 'hours' %>
 				<%= f.error :hours %>
@@ -32,7 +32,18 @@
 						<% else %>
 							<tr>
 								<td><%= a.object.code %></td>
-								<td><%= a.object.name %></td>
+								<td>
+									<a href="#modal<%= a.object.code %>" data-toggle="modal"><%= a.object.name %></a>
+									<div class="modal fade" id="modal<%= a.object.code %>">
+									  <div class="modal-header">
+									    <a class="close" data-dismiss="modal">&times;</a>
+									    <h3><%= a.object.name %></h3>
+									  </div>
+									  <div class="modal-body">
+									    <p>This is the description of activity <%= a.object.code %>.</p>
+									  </div>
+									</div>
+								</td>
 								<td><%= a.text_field :hours, class: 'hours' %></td>
 							</tr>
 						<% end -%>

@@ -16,8 +16,13 @@ class LogEntriesController < ApplicationController
     @log_entry = @activity_log.log_entries.build(params[:log_entry])
     # raise "error"
     if @log_entry.save
-      flash[:success] = "Log entry has been created."
-      redirect_to [@activity_log, @log_entry]
+      if @log_entry.sum_hours <= @log_entry.hours
+        flash[:success] = "Log entry has been created."
+        redirect_to [@activity_log, @log_entry]
+      else
+        # redirect_to edit_activity_log_log_entry_path(@activity_log, @log_entry), invalid: true
+        redirect_to id: @log_entry.id, action: :edit, invalid: true
+      end
     else
       render :new
     end
