@@ -4,6 +4,7 @@ namespace :db do
     populate_table('counties', false)
     populate_table('job_classifications', false)
     populate_table('activity_categories')
+    populate_table('favorite_activities')
     make_users
     make_surveys
     make_activity_logs
