@@ -5,6 +5,8 @@ class CreateFavoriteActivities < ActiveRecord::Migration
       t.integer :county_id
       t.integer :job_classification_id
       t.references :activity_category, null: false
+
+      t.timestamps
     end
     add_index :favorite_activities, :user_id
     add_index :favorite_activities, :county_id

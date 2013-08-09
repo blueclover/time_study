@@ -51,10 +51,12 @@ ActiveRecord::Schema.define(:version => 20130729190751) do
   add_index "counties", ["name"], :name => "index_counties_on_name", :unique => true
 
   create_table "favorite_activities", :force => true do |t|
-    t.integer "user_id"
-    t.integer "county_id"
-    t.integer "job_classification_id"
-    t.integer "activity_category_id",  :null => false
+    t.integer  "user_id"
+    t.integer  "county_id"
+    t.integer  "job_classification_id"
+    t.integer  "activity_category_id",  :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   add_index "favorite_activities", ["county_id"], :name => "index_favorite_activities_on_county_id"

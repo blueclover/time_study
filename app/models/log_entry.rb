@@ -13,15 +13,16 @@ class LogEntry < ActiveRecord::Base
   validates_numericality_of :hours
   validates_uniqueness_of :date, scope: :activity_log_id
 
+  validate :sum_hours_not_more_than_total_hours
 
   def sum_hours
-  	activities.sum(:hours)
+    activities.sum(:hours)
   end
 
   def build_activities    
     ActivityCategory.order(:id).each do |category|
-  		activities.build(activity_category_id: category.id, hours: 0)
-  	end
+      activities.build(activity_category_id: category.id, hours: 0)
+    end
   end
 
   def activity_ids_with_hours
@@ -29,7 +30,10 @@ class LogEntry < ActiveRecord::Base
     activities_with_hours.map(&:activity_category_id) if activities_with_hours
   end
 
-  def check_hours    
-    errors.add(:hours, "Sum of activity hours cannot exceed total hours worked") unless sum_hours <= hours
+  private
+  def sum_hours_not_more_than_total_hours
+    unless self.activities.map(&:hours).sum <= hours
+      errors.add(:hours, "Sum of activity hours cannot exceed total hours worked")
+    end
   end
 end
